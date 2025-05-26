@@ -10,7 +10,7 @@ server.use(express.json());
 server.use(morgan('dev'));
 server.use(cors());
 
-
 server.use(router);
+
 export default server;
 

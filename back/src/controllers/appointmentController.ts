@@ -16,7 +16,7 @@ export const getAppointments = async (req: Request, res: Response) => {
    }
 };
 
-export const getAppointmentsId = async (req: Request <{id: string}>, res: Response): Promise<void> => {
+export const getAppointmentsById = async (req: Request <{id: string}>, res: Response): Promise<void> => {
     try{
         const appointmentFound: IAppointment = await getAppointmentByIdService(parseInt(req.params.id, 10));
         res.status(200).json({

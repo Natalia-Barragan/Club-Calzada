@@ -1,15 +1,22 @@
 import server from './server';
-import { PORT } from './config/envs';
+import { config } from './config/envs';
+import "reflect-metadata";
+import { AppDataSource } from './config/data-sources';
 
-console.log("🚀 SERVIDOR INICIADO – ¡ESTOS SON TUS CAMBIOS!");
+AppDataSource.initialize()
+  .then(() => {
 
-server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
-// por ejemplo, justo antes de `export default server;` en server.ts
-server.get('/', (_req, res) => {
-  res.status(200).json({ message: 'API viva y escuchando' });
-});
+    console.log('Conexion a la base de datos establecida');
+     console.log('Entidades cargadas:', AppDataSource.entityMetadatas.map(e => e.name));
+
+    server.listen(config.PORT, () => {
+      console.log(`Server is running on port ${config.PORT}`);
+    });     
+  })
+  .catch((error) => {
+    console.error('Error al conectar a la base de datos:');
+    console.log(error);
+  });
 
 
 
