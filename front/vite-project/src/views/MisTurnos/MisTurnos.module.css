@@ -1,0 +1,13 @@
+.container {
+    width: 95%;
+    align-items: center;
+    align-content: center;
+
+}
+.turnosContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+}

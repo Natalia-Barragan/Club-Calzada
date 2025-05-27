@@ -1,0 +1,21 @@
+
+.turnoContainer {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ccc;
+  border-radius: 8px;  
+}
+
+.title{
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0;
+    text-align: center;
+}
+
+.p{
+    font-size: 1rem;
+    color: #666;
+    margin: 0;
+    text-align: center;
+}

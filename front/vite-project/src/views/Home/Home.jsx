@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 import styles from "./Home.module.css";
 
 const Home = () => {
