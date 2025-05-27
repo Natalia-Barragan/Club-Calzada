@@ -1,44 +1,57 @@
-import IUser from '../interfaces/IUser';
-import {UserDto, UserRegisterDto} from '../dto/UserDto';
-import {getCredentialServices} from './credentialsServices';
-import { log } from 'console';
-const users: IUser[] = [];
+import {UserDto, UserRegisterDto, UserLoginDto} from '../dto/UserDto';
+import {getCredentialServices, checkUserCredentials } from './credentialsServices';
+import { AppDataSource, UserModel } from '../config/data-sources';
+import { User } from '../entities/User.entity';
+import { Credential } from '../entities/Credential.Entity';
 
-let id: number = 1;
 
-export const registerUserService = async (userData: UserRegisterDto): Promise<IUser> => {
+export const registerUserService = async (userData: UserRegisterDto): Promise<User> => {
 
-    const credentialId: number = await getCredentialServices(userData.username, userData.password);
-
-    const newUser: IUser = {
-        id: id,
-        name: userData.name,        
+    
+    const resultadoTransaccion = await AppDataSource.transaction( async (entityManager) => {
+        const credential: Credential = await getCredentialServices(entityManager, userData.username, userData.password);
+        
+        
+        const newUser: User = entityManager.create(User,{
+        name: userData.name,
         email: userData.email,
         birthdate: new Date(userData.birthdate),
         nDni: userData.nDni,
-        credentialsId: credentialId,
-    
-    };
-    users.push(newUser);
-    id++;
-    return newUser;
+        credentials: credential,
+        })
+
+        await entityManager.save(newUser);
+
+        return newUser;
+    }); 
+     
+    return resultadoTransaccion;
 };
 
 export const getUsersService = async (): Promise<UserDto[]> => {
-    return users.map((user) => {
-        return {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-        };
-    });
+    const users: User[] = await UserModel.find()
+    return users
 };
 
 
 export const getUserByIdService = async (id: number): Promise<UserDto | undefined> => {
-    const userfound = users.find((user) => user.id === id);
-    if (!userfound) throw new Error('el usuario con Id ${id} no existe');
+    const userfound: User | null = await UserModel.findOne({
+        where: { id: id },
+        relations: ['appointments']   
+    })
+    if (!userfound) throw new Error(`el usuario con Id ${id} no existe`);
     return userfound;
 };
 
 export const deleteUserService = async () => {};
+
+
+export const loginUserService = async (userCredencials:UserLoginDto): Promise<User | null> => {
+    const credential: Credential = await checkUserCredentials(userCredencials.username, userCredencials.password);
+    const userFound: User | null = await UserModel.findOne({
+        where: { credentials: { id: credential.id } },
+    });
+
+    return userFound;
+};
+

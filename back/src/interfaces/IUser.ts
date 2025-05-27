@@ -1,10 +1,10 @@
-interface IUser {
-    id: number; 
-    name: string;
-    email: string;
-    birthdate: Date;
-    nDni: number;
-    credentialsId: number;
-}
+// interface IUser {
+//     // id: number; 
+//     name: string;
+//     email: string;
+//     birthdate: Date;
+//     nDni: number;
+//     credentialsId: number;
+// }
 
-export default IUser;
+// export default IUser;

@@ -10,4 +10,4 @@ appointmentRouter.get('/:id', getAppointmentsById);
 
 appointmentRouter.post('/schedule', registerAppointment);
 
-appointmentRouter.delete('/cancel/:id', cancelAppointment);
+appointmentRouter.put('/cancel/:id', cancelAppointment);
