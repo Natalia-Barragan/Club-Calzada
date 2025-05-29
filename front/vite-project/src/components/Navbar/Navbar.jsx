@@ -1,17 +1,14 @@
 import styles from '../Navbar/Navbar.module.css';
+import logo from '../../assets/logo.jpg';
 const Navbar = () => {
     return(
         <nav className={styles.navbar}>
-            <ul>
-                <li className="nav-item">
-                    <a className="nav-link" href="/">Home</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="/about">My appointments</a>     
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="/contact">Contact</a>        
-                </li>
+            <img className={styles.logo} src={logo} alt="logo"></img>
+            <ul className={styles.navLinks}>
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#reservas">Reservas</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#login" className={styles.cta}>Ingresar</a></li>
             </ul>
         </nav>
     );

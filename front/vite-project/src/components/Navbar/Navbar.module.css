@@ -1,6 +1,49 @@
 .navbar {
-    display: flex;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: red;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 8px #0f8940cf;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navLinks {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navLinks li a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  font-size: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  transition: color 0.3s;
+  margin: 20px;
+}
+
+.navLinks li a:hover {
+  color: #118746e0;
+}
+
+.cta {
+  background-color: #0f8940;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  color: black;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.cta:hover {
+  background-color: #118746e0;
+}
+
+.logo {
+  height: 100px;
+  width: 110px;
 }

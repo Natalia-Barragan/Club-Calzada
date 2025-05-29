@@ -1,17 +1,27 @@
-import { useState } from 'react';
-import myAppointments from '../../helpers/myAppointments';
+import { useEffect, useState } from 'react';
 import Turno from '../../components/Turno/Turno';
 import Styles from './MisTurnos.module.css';
+import axios from 'axios';
 
 
 export default function MisTurnos() {
 
-    const [turnos, setTurnos] = useState(myAppointments);
+    const [turnos, setTurnos] = useState([]);
 
+    useEffect(() => {
+        axios.get('http://localhost:3000/appointments/')
+            .then(info => {
+                setTurnos(info.data.data);
+            })
+            .catch(error => {
+                console.error('Error fetching appointments:', error);
+            });
+    }, []);
+        
     return (
         <div className={Styles.container}>
             <div className={Styles.title}>
-            <h1 >Mis Turnos</h1>
+            <h1 >MIS TURNOS</h1>
             </div>
             <div className={Styles.turnosContainer}>
 

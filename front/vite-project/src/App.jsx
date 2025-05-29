@@ -1,5 +1,7 @@
 import Home from './views/Home/Home'
+import Login from './views/Login/Login'
 import MisTurnos from './views/MisTurnos/MisTurnos'
+import Register from './views/Register/Register'
 
 function App() {
   
@@ -7,6 +9,8 @@ function App() {
     <>
       <Home />
       <MisTurnos />
+      <Register />
+      <Login />
     </>
   )
 }

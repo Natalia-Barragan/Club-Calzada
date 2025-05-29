@@ -3,10 +3,10 @@ import styles from "./Home.module.css";
 
 const Home = () => {
   return (
-    <>
-        <h1 className={styles.title}> HOME </h1>
-        <Navbar />
-    </>
+    <div >
+         <Navbar />
+         <h1 className={styles.title}> BIENVENIDO AL CLUB CALZADA </h1>
+    </div>
   );
 };
 

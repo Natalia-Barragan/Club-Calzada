@@ -21,4 +21,3 @@ export const AppDataSource = new DataSource({
 
 export const UserModel: Repository<User> = AppDataSource.getRepository(User);
 export const CredentialModel: Repository<Credential> = AppDataSource.getRepository(Credential);
-export const AppointmentModel: Repository<Appointment> = AppDataSource.getRepository(Appointment);

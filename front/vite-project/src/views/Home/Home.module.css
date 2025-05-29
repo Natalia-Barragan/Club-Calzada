@@ -1,5 +1,8 @@
+
 .title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: red;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 800;
+    color: #0f8940;
+    font-family: 'Segoe UI', sans-serif;
 }

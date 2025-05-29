@@ -1,6 +1,7 @@
 import {Router} from 'express';
 import { getUsers, registerUser, getUserById, loginUser } from '../controllers/userController';
 
+
 export const userRouter : Router = Router();
 
 userRouter.get('/', getUsers);
