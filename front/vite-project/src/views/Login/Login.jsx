@@ -4,8 +4,12 @@ import { useFormik } from 'formik';
 import { loginFormValidate } from '../../helpers/formValidate';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
+
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -16,13 +20,18 @@ export default function Login() {
       axios.post('http://localhost:3000/users/login', values)
         .then(res => {
             if(res.status === 200){
-            Swal.fire({
-                title: '¡Bienvenido!',
-                text: 'Inicio de sesión exitoso',
-                icon: 'success'
+              localStorage.setItem('user', JSON.stringify(res.data.user));
+                Swal.fire({
+                  title: '¡Bienvenido!',
+                  text: 'Inicio de sesión exitoso',
+                  icon: 'success'
             });
-            }
+
+            navigate('/');
+          }
         })
+        
+
         .catch(err => {
           const errorMsg = err?.response?.data?.error || err?.response?.data?.message || "Error al iniciar sesión";
           Swal.fire({
@@ -38,7 +47,7 @@ export default function Login() {
 
   return (
     <form className={styles.loginForm} onSubmit={formik.handleSubmit}>
-      <h1 className={styles.title}>Iniciar Sesión</h1>
+      <h1 className={styles.title}>INICIAR SESIÓN</h1>
 
       <div>
         <label className={styles.label}>USUARIO:</label>
@@ -79,6 +88,10 @@ export default function Login() {
       >
         INGRESAR
       </button>
+
+      <div className={styles.registerLink}>
+        <p>¿No estas registrado? <a href="/register">REGISTRARSE</a></p>
+      </div>
     </form>
   );
 }

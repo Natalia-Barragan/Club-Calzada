@@ -1,11 +1,14 @@
 import styles from './Register.module.css';
 import { useFormik } from 'formik';
 import { registerFormValidate } from '../../helpers/formValidate';
+import { useNavigate } from 'react-router-dom';    
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
 
 export default function Register() {
+    const navigate = useNavigate();
+
 
     const formik = useFormik(
         {initialValues: {
@@ -35,6 +38,7 @@ export default function Register() {
                             icon: 'success',                
                         });
                     }
+                    navigate('/login');
                 })
                 .catch((err) => {
                     console.log(err);
@@ -46,7 +50,7 @@ export default function Register() {
                         title: `Ya existe un usuario con el mail: ${formik.values.email}`
                         })
 
-                    } else if(err.response.data.error.includes ('username')){
+                    } else if(err.response.data.error.includes ('usuario')){
 
                         Swal.fire({
                         icon:'error',
@@ -65,13 +69,15 @@ export default function Register() {
             validateOnBlur: true,    
 })
 
-
-
     return (
        
         <form className={styles.registerForm} onSubmit={formik.handleSubmit}>
 
-            <h1 className={styles.title}>Formulario de Registro</h1>
+            <h1 className={styles.title}>FORMULARIO DE REGISTRO</h1>
+
+               <div className={styles.registerLink}>
+                    <p>¿Ya estas registrado? <a href="/login">INGRESAR</a></p>
+                </div>
 
             <div>
                 <label className={styles.label}>NOMBRE:</label>
@@ -112,6 +118,7 @@ export default function Register() {
             </div>
 
             <button className={styles.button} type="submit" disabled={!(formik.isValid && formik.dirty)} >REGISTRAR</button>
+
         </form>
       
     );

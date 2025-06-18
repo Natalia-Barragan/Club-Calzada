@@ -19,11 +19,12 @@ export const getAppointmentByIdService = async (id: number): Promise<Appointment
 }
 
 export const registerAppointmentService = async (appointmentData: AppointmentRegisterDto): Promise<Appointment> => {
-   await getUserByIdService(appointmentData.userId);
+   
+    await getUserByIdService(appointmentData.userId);
 
-   AppointmentRepository.validateAllowAppointment( appointmentData.date, appointmentData.time);
+    AppointmentRepository.validateAllowAppointment( appointmentData.date, appointmentData.time);
 
-   await AppointmentRepository.validateExistingApointment(appointmentData.userId, appointmentData.date, appointmentData.time);
+    await AppointmentRepository.validateExistingApointment(appointmentData.userId, appointmentData.date, appointmentData.time);
 
     const newAppointment = AppointmentRepository.create({
         date: appointmentData.date,

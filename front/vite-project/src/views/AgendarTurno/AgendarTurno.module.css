@@ -1,9 +1,16 @@
+h1{
+  text-align: center;
+    margin-top: 4rem;
+    font-size: 40px;
+    font-weight: 800;
+    color: #0f8940;
+    font-family: 'Segoe UI', sans-serif;
+}
 
-
-.registerForm {
-  width: 90%;      
-  max-width: 800px;    
-  margin: 4rem auto;  
+.form {
+  width: 90%;
+  max-width: 800px;
+  margin: 4rem auto;
   padding: 2.5rem;
   background: black;
   border-radius: 12px;
@@ -13,20 +20,11 @@
   display: flex;
   flex-direction: column;
   gap: 1.3rem;
-
 }
 
-.register-form div{
-    width: 100%;
-}
-
-.title {
-  text-align: center;
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  color: #0f8940;
-  font-family: 'Segoe UI', sans-serif;
+.field {
+  display: flex;
+  flex-direction: column;
 }
 
 .label {
@@ -74,32 +72,16 @@
   background-color: #118746e0;
 }
 
-.error {
-  margin-top: 0.3rem;
-  color: #f83434;
-  font-size: 1rem;
-  font-weight: 600;
-  font-family: 'Segoe UI', sans-serif;
-
-}
-
 .button:disabled {
   background-color: #666;
   cursor: not-allowed;
   opacity: 0.6;
 }
 
-
-.registerLink{
-  color: #b6b5b5;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1.1rem;
-  font-family: 'Segoe UI', sans-serif;
-}
-.registerLink a {
-  color: #0f8940;
-  text-decoration: none;
+.error {
+  margin-top: 0.3rem;
+  color: #f83434;
+  font-size: 1rem;
   font-weight: 600;
   font-family: 'Segoe UI', sans-serif;
 }

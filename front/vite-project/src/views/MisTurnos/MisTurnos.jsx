@@ -4,19 +4,20 @@ import Styles from './MisTurnos.module.css';
 import axios from 'axios';
 
 
-export default function MisTurnos() {
-
+export default function MisTurnos({userId}) {
+    
     const [turnos, setTurnos] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3000/appointments/')
-            .then(info => {
-                setTurnos(info.data.data);
+        axios.get(`http://localhost:3000/users/${userId}`)
+            .then(({data})=> {
+                localStorage.setItem("appointments", JSON.stringify(data.data.appointments));
+                setTurnos( JSON.parse(localStorage.getItem("appointments")));
             })
             .catch(error => {
-                console.error('Error fetching appointments:', error);
-            });
-    }, []);
+                console.log(error);
+            })
+    }, [userId]);
         
     return (
         <div className={Styles.container}>
