@@ -34,8 +34,13 @@ export default function Register() {
                 .then (res => {
                     if (res.status === 201){
                         Swal.fire({
-                            text: 'Usuario registrado correctamente',
-                            icon: 'success',                
+                            title: 'Usuario registrado correctamente',
+                            icon: 'success',  
+                            showConfirmButton: false,
+                            timer: 1300,              
+                            customClass: {
+                                title: styles.swalTitle,                                
+                            }
                         });
                     }
                     navigate('/login');
@@ -47,20 +52,32 @@ export default function Register() {
 
                         Swal.fire({
                         icon:'error',
-                        title: `Ya existe un usuario con el mail: ${formik.values.email}`
+                        title: `Ya existe un usuario con el mail: ${formik.values.email}`,
+                        confirmButtonColor:" #0f8940",
+                        customClass: {
+                                title: styles.swalTitle,                                
+                            }
                         })
 
                     } else if(err.response.data.error.includes ('usuario')){
 
                         Swal.fire({
                         icon:'error',
-                        title: `Ya existe un usuario con el username: ${formik.values.username}`
+                        title: `Ya existe un usuario con el username: ${formik.values.username}`,
+                        confirmButtonColor:" #0f8940" ,
+                        customClass: {
+                                title: styles.swalTitle,                                
+                            }  
                         })
 
                     } else if(err.response.data.error.includes('nDni')){
                         Swal.fire({
                         icon:'error',
-                        title: `Ya existe un usuario con el DNI: ${formik.values.nDni}`
+                        title: `Ya existe un usuario con el DNI: ${formik.values.nDni}`,
+                        confirmButtonColor:" #0f8940",
+                        customClass: {
+                                title: styles.swalTitle,                                
+                            }
                         })
                     }
                 })

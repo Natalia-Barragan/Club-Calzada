@@ -11,8 +11,9 @@ export default function MisTurnos({userId}) {
     useEffect(() => {
         axios.get(`http://localhost:3000/users/${userId}`)
             .then(({data})=> {
-                localStorage.setItem("appointments", JSON.stringify(data.data.appointments));
-                setTurnos( JSON.parse(localStorage.getItem("appointments")));
+                // localStorage.setItem("appointments", JSON.stringify(data.data.appointments));
+                // setTurnos( JSON.parse(localStorage.getItem("appointments")));
+                setTurnos(data.data.appointments);
             })
             .catch(error => {
                 console.log(error);
@@ -35,6 +36,7 @@ export default function MisTurnos({userId}) {
                             date={turno.date}
                             time={turno.time}
                             status={turno.status}
+                            setTurnos={setTurnos}
                             />                    
                         )
                     ) : (

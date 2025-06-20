@@ -17,14 +17,24 @@ export default function Login() {
     },
     validate: loginFormValidate,
     onSubmit: (values) => {
+      const userJson = localStorage.getItem('user');
+      const user = userJson ? JSON.parse(userJson) : null;
+      const nombre = user ? user.nombre : values.username;
+
       axios.post('http://localhost:3000/users/login', values)
         .then(res => {
             if(res.status === 200){
-              localStorage.setItem('user', JSON.stringify(res.data.user));
+              localStorage.setItem('user', JSON.stringify(res.data.user))
+                
                 Swal.fire({
-                  title: '¡Bienvenido!',
-                  text: 'Inicio de sesión exitoso',
-                  icon: 'success'
+                  title: `¡Bienvenido ${nombre}!`,
+                  icon: 'success',
+                  timer: 1300,
+                  showConfirmButton: false,
+                  customClass: {
+                    title: styles.swalTitle,  
+                    htmlContainer: styles.swalText                              
+                  }
             });
 
             navigate('/');
@@ -37,7 +47,13 @@ export default function Login() {
           Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: errorMsg
+            text: errorMsg,
+            showConfirmButton: false,
+            timer: 1300,
+            customClass: {
+              title: styles.swalTitle,  
+              text: styles.swalText                              
+            }            
           });
         });
     },

@@ -3,6 +3,8 @@ import { dateTimeValidate } from '../../helpers/formValidate';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import styles from '../AgendarTurno/AgendarTurno.module.css';
+import pelotaImg from '../../assets/pelota2.gif';
+
 
 const AgendarTurno = () => {
 
@@ -21,12 +23,29 @@ const AgendarTurno = () => {
             const userJson = localStorage.getItem('user');
             const user = JSON.parse(userJson);
             const schedule = { ...values, userId: user.id };
+            console.log(schedule);
             axios.post(`http://localhost:3000/appointments/schedule`, schedule)
                 .then(res => {
                     if (res.status === 201) {
                         Swal.fire({
-                            text: 'Turno agendado correctamente',
-                            icon: 'success',
+                          
+                          title: "¡YA RESERVAMOS TU CANCHA!",
+                          // padding: "3em",
+                          color: "white",
+                          background: "transparent",
+                          showConfirmButton: false,
+                          timer: 2500,
+                        
+                          backdrop: `rgba(15, 137, 64, 0.3)
+                            url("${pelotaImg}")
+                            center 
+                            no-repeat
+                          `,
+                          customClass: {
+                            title: styles.swalTitle,
+                          }   
+
+
                         });
                       formik.resetForm();
                     }

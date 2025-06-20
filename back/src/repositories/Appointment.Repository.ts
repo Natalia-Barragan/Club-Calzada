@@ -46,8 +46,8 @@ export const AppointmentRepository =  AppDataSource.getRepository(Appointment).e
             }
         })
 
-        if (appointmentFround) {
-            throw new Error(`La reserva con fecha ${date} y hora ${time} ya existe para este usuario`);
-        }
+        // if (appointmentFround) {
+        //     throw new Error(`La reserva con fecha ${date} y hora ${time} ya existe para este usuario`);
+        // }
     }
 });

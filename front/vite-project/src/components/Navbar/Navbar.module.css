@@ -38,6 +38,14 @@
   color: #118746e0;
 }
 
+p {
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0;
+}
+
 .cta {
   background-color: #0f8940;
   padding: 0.5rem 1rem;
@@ -73,4 +81,19 @@
 .active {
   color: #0f8940;
   text-decoration: none;
+}
+
+.swalTitle {
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  color: black;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+.swalText {
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  color: black;
+  font-size: 1.5rem;
+  font-weight: 500;
 }

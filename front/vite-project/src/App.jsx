@@ -11,13 +11,10 @@ import AgendarTurno from './views/AgendarTurno/AgendarTurno'
 
 
 function App() {
-    const navigate = useNavigate();
-    const location = useLocation();
-    const [user, setUser] = useState(false);
-    // const [isLoading, setIsLoading] = useState(false);
-    const [isNotFound, setNotFound] = useState(false);
-
-
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [user, setUser] = useState(false);
+  const [isNotFound, setNotFound] = useState(false);
 
     useEffect(() => {
 
@@ -27,12 +24,7 @@ function App() {
     
       const userJson = localStorage.getItem('user');
       const user = JSON.parse(userJson);
-      if (user) setUser(user.id);
-      
-      // const userJson = localStorage.getItem('user');
-      // const parsedUser = JSON.parse(userJson);
-      // setUser(parsedUser?.id || null);
-      // setIsLoading(false);
+      if (user) setUser(user);
 
       if (!user && location.pathname !== '/login' && location.pathname !== '/register') {
         navigate('/login');
@@ -41,16 +33,13 @@ function App() {
         navigate('/');
       }
 
-    }, [location.pathname, user, navigate]);
-
-    // if (isLoading) return <p>Cargando...</p>;
-
+    }, [location.pathname, navigate ]);
   return (
     <>
 
       {!user ? (
         <>
-          <Navbar setUser={setUser} />
+          <Navbar user={user} setUser={setUser} />
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -60,42 +49,21 @@ function App() {
         <>
           {!isNotFound && (
             <>
-              <Navbar setUser={setUser}/>     
+              <Navbar user={user} setUser={setUser}/>     
             </>      
           )}
           <>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/agendarTurno" element={<AgendarTurno />} />
-              <Route path="/misTurnos" element={<MisTurnos userId={user} />} />
+              <Route path="/misTurnos" element={<MisTurnos userId={user?.id} />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </>
         </>
       )
-      }
-      {/* <Navbar />
-
-        {!user && (
-          <Routes>
-              <Route path="/login" element={<Login />}> </Route>
-              <Route path="/register" element={<Register />}> </Route>
-          </Routes>
-        )}
-
-          <>
-            {user && (
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/agendarTurno" element={<AgendarTurno />} />
-                <Route path="/misTurnos" element={<MisTurnos userId={user} />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            )}
-          </> */}
-
+      }      
     </>
-
   )
 }
 

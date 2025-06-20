@@ -4,8 +4,7 @@ import styles from "./NotFound.module.css";
 function NotFound() {
     return (
         <div className={styles.container}>
-            <h1>404</h1>
-            <p className={styles.title}>Página no encontrada</p>
+            <h1 className={styles.title}>PAGINA NO ENCONTRADA</h1>
             <Link to="/" className={styles.link}>VOLVER AL INICIO</Link>
         </div>
     );
