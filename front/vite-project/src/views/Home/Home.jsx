@@ -6,7 +6,7 @@ const Home = () => {
   const userJson = localStorage.getItem('user');
   const user = userJson ? JSON.parse(userJson) : null;
   return (
-    <div >
+    <div className={styles.background}>
         <h1 className={styles.title}> BIENVENIDO {(user.name).toUpperCase()} AL CLUB CALZADA </h1>
 
         <div className={styles.container}>               

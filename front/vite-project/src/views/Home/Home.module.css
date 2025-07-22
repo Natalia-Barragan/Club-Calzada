@@ -1,3 +1,13 @@
+.background {
+    background-image: url("../../assets/pelotaGrandeClara.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;  /* Asegura que se vea toda la pelota */
+    background-attachment: scroll;
+    height: calc(95vh - 95px);  /* Ajustá este valor si el navbar es más alto */
+    overflow: hidden;
+}
+ 
 .container {
     display: flex;
     flex-direction: column;
@@ -7,7 +17,8 @@
 }
 .title {
     text-align: center;
-    margin-top: 4rem;
+    padding-top: 7rem;
+    margin: 0;
     font-size: 40px;
     font-weight: 800;
     color: #0f8940;
@@ -15,10 +26,11 @@
 }
 
 .img{
-    width: 500px;
-    height: 500px;   
+    padding-top: 30px;
+    width: 450px;
+    height: 450px;   
 }
 .img:hover {
-    width: 550px;
-    height: 550px;
+    width: 500px;
+    height: 500px;
 }
