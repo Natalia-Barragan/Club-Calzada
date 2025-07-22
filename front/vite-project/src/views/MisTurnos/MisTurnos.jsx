@@ -10,9 +10,7 @@ export default function MisTurnos({userId}) {
 
     useEffect(() => {
         axios.get(`http://localhost:3000/users/${userId}`)
-            .then(({data})=> {
-                // localStorage.setItem("appointments", JSON.stringify(data.data.appointments));
-                // setTurnos( JSON.parse(localStorage.getItem("appointments")));
+            .then(({data})=> {            
                 setTurnos(data.data.appointments);
             })
             .catch(error => {

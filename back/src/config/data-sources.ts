@@ -2,7 +2,6 @@ import { DataSource, Repository } from 'typeorm';
 import { config } from './envs';
 import { User } from '../entities/User.entity';
 import { Credential } from '../entities/Credential.Entity';
-import { Appointment } from '../entities/Appointment.entity';
 
 
 export const AppDataSource = new DataSource({

@@ -24,8 +24,7 @@ export const AppointmentRepository =  AppDataSource.getRepository(Appointment).e
 
         if (diffInHours < 24) {
         throw new Error('Las reservas solo se pueden agendar con al menos 24 horas de anticipación');
-}
-
+        }
 
         const dayOfWeek = appointmentDate.getDay();
         if (dayOfWeek === 0 || dayOfWeek === 6) {
@@ -45,9 +44,5 @@ export const AppointmentRepository =  AppDataSource.getRepository(Appointment).e
             time: time
             }
         })
-
-        // if (appointmentFround) {
-        //     throw new Error(`La reserva con fecha ${date} y hora ${time} ya existe para este usuario`);
-        // }
     }
 });

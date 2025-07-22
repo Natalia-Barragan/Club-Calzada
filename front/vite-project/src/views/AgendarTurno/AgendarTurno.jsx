@@ -30,7 +30,6 @@ const AgendarTurno = () => {
                         Swal.fire({
                           
                           title: "¡YA RESERVAMOS TU CANCHA!",
-                          // padding: "3em",
                           color: "white",
                           background: "transparent",
                           showConfirmButton: false,

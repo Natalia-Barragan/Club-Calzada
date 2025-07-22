@@ -1,5 +1,5 @@
 .turnoContainer {
-  position: relative; /* Importante para posicionar el status dentro */
+  position: relative;
   padding: 2rem;
   border: 1px solid #ccc;
   border-radius: 12px;
