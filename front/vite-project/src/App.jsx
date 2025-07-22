@@ -2,7 +2,7 @@ import Home from './views/Home/Home'
 import Login from './views/Login/Login'
 import MisTurnos from './views/MisTurnos/MisTurnos'
 import Register from './views/Register/Register'
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
+import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
 import { useEffect, useState, } from 'react'
 import NotFound from './components/NotFound/NotFound'
@@ -29,9 +29,10 @@ function App() {
       if (!user && location.pathname !== '/login' && location.pathname !== '/register') {
         navigate('/login');
       }
-      if (user && location.pathname === '/login' || user && location.pathname === '/register') {
+      if (user && location.pathname === '/login' || location.pathname === '/register') {
         navigate('/');
-      }
+}
+
 
     }, [location.pathname, navigate ]);
   return (
@@ -43,6 +44,7 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="*" element={<Navigate to="/login" />} />
           </Routes>
         </>
       ) : (
