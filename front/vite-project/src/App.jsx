@@ -19,8 +19,7 @@ function App() {
     useEffect(() => {
 
       const validRoutes = ['/login', '/register', '/', '/agendarTurno', '/misTurnos'];
-      if (!validRoutes.includes(location.pathname)) setNotFound(true);
-      else setNotFound(false);
+      setNotFound(!validRoutes.includes(location.pathname));
     
       const userJson = localStorage.getItem('user');
       const user = JSON.parse(userJson);
@@ -29,9 +28,9 @@ function App() {
       if (!user && location.pathname !== '/login' && location.pathname !== '/register') {
         navigate('/login');
       }
-      if (user && location.pathname === '/login' || location.pathname === '/register') {
+      if (user && (location.pathname === '/login' || location.pathname === '/register')) {
         navigate('/');
-}
+      }
 
 
     }, [location.pathname, navigate ]);

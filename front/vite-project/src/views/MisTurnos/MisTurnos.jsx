@@ -13,9 +13,7 @@ export default function MisTurnos({userId}) {
             .then(({data})=> {            
                 setTurnos(data.data.appointments);
             })
-            .catch(error => {
-                console.log(error);
-            })
+            .catch(() => {})
     }, [userId]);
         
     return (

@@ -46,7 +46,6 @@ export default function Register() {
                     navigate('/login');
                 })
                 .catch((err) => {
-                    console.log(err);
 
                     if (err.response.data.error.includes('email')){
 

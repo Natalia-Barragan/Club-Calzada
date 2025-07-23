@@ -23,7 +23,6 @@ const AgendarTurno = () => {
             const userJson = localStorage.getItem('user');
             const user = JSON.parse(userJson);
             const schedule = { ...values, userId: user.id };
-            console.log(schedule);
             axios.post(`http://localhost:3000/appointments/schedule`, schedule)
                 .then(res => {
                     if (res.status === 201) {
