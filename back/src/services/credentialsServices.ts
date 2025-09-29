@@ -36,6 +36,7 @@ export const checkUserCredentials = async (
     username: string,
     password: string
 ): Promise<Credential> => {
+
     const credentialFound = await CredentialModel.findOne({ where: { username } });
 
     const cryptPassword = await crypPass(password);

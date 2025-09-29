@@ -46,7 +46,8 @@ export const getUserByIdService = async (id: number): Promise<UserDto | undefine
 export const deleteUserService = async () => {};
 
 
-export const loginUserService = async (userCredencials:UserLoginDto): Promise<User | null> => {
+export const loginUserService = async (userCredencials:UserLoginDto): Promise<User | null> => {    
+
     const credential: Credential = await checkUserCredentials(userCredencials.username, userCredencials.password);
     const userFound: User | null = await UserModel.findOne({
         where: { credentials: { id: credential.id } },

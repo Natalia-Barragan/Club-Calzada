@@ -11,7 +11,6 @@ import { PostgresError } from '../interfaces/postgresErrorInterface';
 export const getUsers = async (req: Request, res: Response): Promise<void> => {
     try{
         const users: UserDto[] = await getUsersService();
-        console.log(users);
         res.status(200).json({
             message: 'Lista de usuarios',
             data: users
