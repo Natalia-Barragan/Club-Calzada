@@ -14,6 +14,7 @@ export const AppDataSource = new DataSource({
   synchronize: config.BD_SYNC,
   dropSchema: config.BD_DROP_SCHEMA,
   logging: config.DB_LOGGING,
+  ssl: config.BD_SSL ? { rejectUnauthorized: false } : false,
   entities: ['src/entities/*.entity.ts']
 
 });

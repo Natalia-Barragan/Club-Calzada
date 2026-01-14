@@ -8,4 +8,5 @@ export interface Iconfig {
     BD_SYNC: boolean;
     BD_DROP_SCHEMA: boolean;
     DB_LOGGING: boolean;
+    BD_SSL: boolean;
 }
