@@ -1,36 +1,125 @@
-.background {
-    background-image: url("../../assets/pelotaGrandeClara.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;  
-    background-attachment: scroll;
-    height: calc(95vh - 95px);  
-    overflow: hidden;
-}
- 
-.container {
+.homeContainer {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: auto;   
-}
-.title {
-    text-align: center;
-    padding-top: 7rem;
-    margin: 0;
-    font-size: 40px;
-    font-weight: 800;
-    color: #0f8940;
-    font-family: 'Segoe UI', sans-serif;
 }
 
-.img{
-    padding-top: 30px;
-    width: 450px;
-    height: 450px;   
+.hero {
+    /* Dark overlay still good for contrast with white text */
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../../assets/pelotaGrandeClara.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    padding: 2rem;
 }
-.img:hover {
-    width: 500px;
-    height: 500px;
+
+.heroTitle {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.heroSubtitle {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    color: #f0f0f0;
+}
+
+.ctaButton {
+    background-color: var(--color-green);
+    color: var(--color-white);
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(15, 137, 64, 0.4);
+    text-decoration: none;
+}
+
+.ctaButton:hover {
+    background-color: var(--color-green-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(15, 137, 64, 0.6);
+}
+
+.features {
+    padding: 4rem 2rem;
+    background-color: var(--color-bg-body);
+    /* Light Gray */
+    text-align: center;
+}
+
+.sectionTitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    /* Dark Text */
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+}
+
+.sectionTitle::after {
+    content: '';
+    display: block;
+    width: 60%;
+    height: 4px;
+    background-color: var(--color-green);
+    margin: 0.5rem auto 0;
+    border-radius: 2px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    background-color: var(--color-bg-card);
+    /* White */
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #eee;
+    /* Light border */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-green);
+}
+
+.cardIcon {
+    font-size: 3rem;
+    color: var(--color-green);
+    margin-bottom: 1rem;
+}
+
+.cardTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--color-text-primary);
+}
+
+.cardText {
+    color: var(--color-text-secondary);
 }

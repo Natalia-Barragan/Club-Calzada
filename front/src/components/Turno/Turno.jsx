@@ -2,12 +2,12 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import Style from './Turno.module.css';
 
-function Turno({ id, date, time, status, setTurnos }) {
+function Turno({ id, date, time, description, status, setTurnos }) {
   const handlerCancel = () => {
     Swal.fire({
       title: '¿Estás seguro?',
       icon: 'question',
-      showCancelButton: true,      
+      showCancelButton: true,
       confirmButtonColor: "#0f8940",
       cancelButtonColor: "#d32828cf",
       confirmButtonText: 'Cancelar',
@@ -15,7 +15,7 @@ function Turno({ id, date, time, status, setTurnos }) {
       customClass: {
         title: Style.swalTitle,
       }
-      
+
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -47,18 +47,18 @@ function Turno({ id, date, time, status, setTurnos }) {
 
   return (
     <div className={Style.turnoContainer}>
-      <h1 className={Style.title}>Turno</h1>
+      <h1 className={Style.title}>{description || 'Turno'}</h1>
       <p className={Style.p}>Fecha: {date}</p>
       <p className={Style.p}>Hora: {time}</p>
       <p className={status === "active" ? Style.active : Style.cancelled}>{status}</p>
-        <div className={Style.buttonContainer}>
-            <button className={Style.button}
-            onClick={handlerCancel}
-            disabled={status === 'cancelled'}
-            style={status === 'cancelled' ? { visibility: 'hidden' } : {}}>
-            Cancelar
-            </button>
-        </div>
+      <div className={Style.buttonContainer}>
+        <button className={Style.button}
+          onClick={handlerCancel}
+          disabled={status === 'cancelled'}
+          style={status === 'cancelled' ? { visibility: 'hidden' } : {}}>
+          Cancelar
+        </button>
+      </div>
     </div>
   );
 }

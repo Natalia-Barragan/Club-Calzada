@@ -1,11 +1,9 @@
-import styles from '../Navbar/Navbar.module.css';
+import styles from './Navbar.module.css';
 import logo from '../../assets/logo.jpg';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-
-
-const Navbar = ({ user, setUser}) => {
+const Navbar = ({ user, setUser }) => {
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -13,7 +11,7 @@ const Navbar = ({ user, setUser}) => {
   const handlerLogOut = () => {
     const storedUser = localStorage.getItem('user');
 
-    if (!storedUser) {      
+    if (!storedUser) {
       return;
     }
 
@@ -25,54 +23,56 @@ const Navbar = ({ user, setUser}) => {
       confirmButtonColor: '#0f8940',
       showCloseButton: false,
       customClass: {
-        title: styles.swalTitle,  
-        htmlContainer: styles.swalText                              
+        popup: styles.swalPopup,
+        title: styles.swalTitle,
+        htmlContainer: styles.swalText
       }
     }).then(() => {
       localStorage.removeItem('user');
       setUser(null);
       navigate("/login");
     });
-     
+
   };
 
   return (
     <nav className={styles.navbar}>
-      <img className={styles.logo} src={logo} alt="logo" />
-      <ul className={styles.navLinks}>
+      <div className={styles.logoContainer}>
+        <img className={styles.logo} src={logo} alt="Club Calzada" />
+        <span className={styles.title}>Club Calzada</span>
+      </div>
 
-        {!user && (
+      <ul className={styles.navLinks}>
+        {user && (
           <>
             <li>
-              <Link to="/register" className={`${styles.link} ${location.pathname === '/register' ? styles.active : ''}`}>REGISTRARSE</Link>
+              <Link to="/" className={`${styles.link} ${location.pathname === '/' ? styles.active : ''}`}>Inicio</Link>
             </li>
             <li>
-              <Link to="/login" className={`${styles.link} ${styles.cta} ${location.pathname === '/login' ? styles.active : ''}`}>INGRESAR</Link>
+              <Link to="/agendarTurno" className={`${styles.link} ${location.pathname === '/agendarTurno' ? styles.active : ''}`}>Reservar</Link>
+            </li>
+            <li>
+              <Link to="/misTurnos" className={`${styles.link} ${location.pathname === '/misTurnos' ? styles.active : ''}`}>Mis Turnos</Link>
             </li>
           </>
         )}
-        { user &&(
-          <>    
-            <li>
-              <Link to="/" className={`${styles.link} ${location.pathname === '/' ? styles.active : ''}`}>INICIO</Link>
-            </li>
-            <li>
-              <Link to="/agendarTurno" className={`${styles.link} ${location.pathname === '/agendarTurno' ? styles.active : ''}`}>AGENDAR TURNO</Link>
-            </li>
-            <li>
-              <Link to="/misTurnos" className={`${styles.link} ${location.pathname === '/misTurnos' ? styles.active : ''}`}>MIS TURNOS</Link>
-            </li>
-            <li>
-              <Link className={`${styles.link} ${styles.logoutBtn}`} onClick={handlerLogOut}>SALIR</Link>
-            </li>
-          </>   
-        )}
       </ul>
+
+      <div className={styles.actions}>
+        {user ? (
+          <>
+            <span className={styles.userWelcome}>{user.name}</span>
+            <button onClick={handlerLogOut} className={styles.logoutBtn}>Salir</button>
+          </>
+        ) : (
+          <>
+            <Link to="/register" className={styles.registerLink}>Registrarse</Link>
+            <Link to="/login" className={styles.loginBtn}>Ingresar</Link>
+          </>
+        )}
+      </div>
     </nav>
   );
 };
 
 export default Navbar;
-
-
-

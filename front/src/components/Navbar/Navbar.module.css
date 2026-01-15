@@ -1,98 +1,142 @@
+/* Navbar.module.css */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(0, 0, 0);
-  padding: 1rem 2rem;
-  box-shadow: 0 2px 8px #0f8940cf;
+  padding: 0.8rem 2rem;
+  background-color: #000000;
+  /* Pure Black as requested */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
+  border-bottom: 4px solid var(--color-green);
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .logo {
-  padding-left: 2rem;
-  height: 100px;
-  width: 110px;
+  height: 60px;
+  width: auto;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #ffffff;
+  /* White title like in photo context, or maybe keep green? User said "agregando club calzada". I'll default to White for contrast on Black */
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .navLinks {
-  list-style: none;
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
+  list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .link {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+  position: relative;
   text-decoration: none;
-  color: white;
-  font-weight: 500;
-  font-size: 20px;
-  font-family: 'Segoe UI', sans-serif;
-  transition: all 0.3s;
-  margin: 20px;
 }
 
 .link:hover {
-  color: #118746e0;
+  color: var(--color-green);
 }
 
-p {
-  color: white;
-  font-family: 'Segoe UI', sans-serif;
-  font-size: 20px;
-  font-weight: 500;
-  margin: 0;
+.link.active {
+  color: var(--color-green);
 }
 
-.cta {
-  background-color: #0f8940;
-  padding: 0.5rem 1rem;
+.link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--color-green);
+  transition: width 0.3s ease;
+}
+
+.link:hover::after,
+.link.active::after {
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  /* More space between Register and Login */
+}
+
+/* "REGISTRARSE" Link Style */
+.registerLink {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.registerLink:hover {
+  color: var(--color-green);
+}
+
+/* "INGRESAR" Button Style */
+.loginBtn {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: var(--color-green);
+  padding: 0.6rem 1.5rem;
   border-radius: 6px;
-  color: white !important; 
-  font-weight: bold;
-  transition: background-color 0.3s;
-}
-.cta:hover {
-  background-color: #118746e0; 
+  /* Rounded corners like in photo */
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, transform 0.2s;
+  border: none;
 }
 
-.active {
-  color: #0f8940;
-  border-bottom: 2px solid #0f8940;
-  
+.loginBtn:hover {
+  background-color: var(--color-green-dark);
+  transform: translateY(-1px);
 }
 
 .logoutBtn {
-  background-color: #e02828dc;
+  background-color: transparent;
+  border: 2px solid var(--color-green);
+  color: var(--color-green);
   padding: 0.5rem 1rem;
-  border-radius: 26px;
-  color: white !important;
-  font-weight: bold;
-  transition: background-color 0.3s;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-family: var(--font-main);
 }
 
 .logoutBtn:hover {
-  background-color: #c22727;
+  background-color: var(--color-green);
+  color: #fff;
 }
 
-.active {
-  color: #0f8940;
-  text-decoration: none;
-}
-
-.swalTitle {
-  text-align: center;
-  font-family: 'Segoe UI', sans-serif;
-  color: black;
-  font-size: 2.5rem;
+.userWelcome {
+  color: #fff;
   font-weight: 600;
-}
-.swalText {
-  text-align: center;
-  font-family: 'Segoe UI', sans-serif;
-  color: black;
-  font-size: 1.5rem;
-  font-weight: 500;
+  margin-right: 1rem;
+  text-transform: uppercase;
 }

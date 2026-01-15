@@ -1,17 +1,16 @@
+
 import styles from './Register.module.css';
 import { useFormik } from 'formik';
 import { registerFormValidate } from '../../helpers/formValidate';
-import { useNavigate } from 'react-router-dom';    
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-
 
 export default function Register() {
     const navigate = useNavigate();
 
-
-    const formik = useFormik(
-        {initialValues: {
+    const formik = useFormik({
+        initialValues: {
             name: '',
             nDni: '',
             birthdate: '',
@@ -26,116 +25,171 @@ export default function Register() {
             email: '',
             username: '',
             password: ''
-        },    
-
+        },
         validate: registerFormValidate,
         onSubmit: (values) => {
             axios.post('http://localhost:3000/users/register', values)
-                .then (res => {
-                    if (res.status === 201){
+                .then(res => {
+                    if (res.status === 201) {
                         Swal.fire({
-                            title: 'Usuario registrado correctamente',
-                            icon: 'success',  
+                            title: '¡Usuario Registrado!',
+                            text: 'Bienvenido a Club Calzada',
+                            icon: 'success',
                             showConfirmButton: false,
-                            timer: 1300,              
+                            timer: 2000,
                             customClass: {
-                                title: styles.swalTitle,                                
+                                popup: styles.swalPopup,
+                                title: styles.swalTitle,
+                                htmlContainer: styles.swalText
                             }
                         });
+                        navigate('/login');
                     }
-                    navigate('/login');
                 })
                 .catch((err) => {
+                    let errorMsg = "Error al registrar usuario";
 
-                    if (err.response.data.error.includes('email')){
-
-                        Swal.fire({
-                        icon:'error',
-                        title: `Ya existe un usuario con el mail: ${formik.values.email}`,
-                        confirmButtonColor:" #0f8940",
-                        customClass: {
-                                title: styles.swalTitle,                                
-                            }
-                        })
-
-                    } else if(err.response.data.error.includes ('usuario')){
-
-                        Swal.fire({
-                        icon:'error',
-                        title: `Ya existe un usuario con el username: ${formik.values.username}`,
-                        confirmButtonColor:" #0f8940" ,
-                        customClass: {
-                                title: styles.swalTitle,                                
-                            }  
-                        })
-
-                    } else if(err.response.data.error.includes('nDni')){
-                        Swal.fire({
-                        icon:'error',
-                        title: `Ya existe un usuario con el DNI: ${formik.values.nDni}`,
-                        confirmButtonColor:" #0f8940",
-                        customClass: {
-                                title: styles.swalTitle,                                
-                            }
-                        })
+                    if (err.response?.data?.error) {
+                        if (err.response.data.error.includes('email')) {
+                            errorMsg = `El email ${formik.values.email} ya está registrado.`;
+                        } else if (err.response.data.error.includes('usuario')) {
+                            errorMsg = `El usuario ${formik.values.username} ya existe.`;
+                        } else if (err.response.data.error.includes('nDni')) {
+                            errorMsg = `El DNI ${formik.values.nDni} ya está registrado.`;
+                        } else {
+                            errorMsg = err.response.data.error;
+                        }
                     }
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error de Registro',
+                        text: errorMsg,
+                        confirmButtonColor: "#2ecc71",
+                        customClass: {
+                            popup: styles.swalPopup,
+                            title: styles.swalTitle,
+                            htmlContainer: styles.swalText
+                        }
+                    });
                 })
         },
-            validateOnChange: true, 
-            validateOnBlur: true,    
-})
+        validateOnChange: true,
+        validateOnBlur: true,
+    })
 
     return (
-       
-        <form className={styles.registerForm} onSubmit={formik.handleSubmit}>
+        <div className={styles.registerContainer}>
+            <div className={styles.registerCard}>
+                <h1 className={styles.title}>Crear Cuenta</h1>
 
-            <h1 className={styles.title}>FORMULARIO DE REGISTRO</h1>
+                <form className={styles.form} onSubmit={formik.handleSubmit}>
 
-               <div className={styles.registerLink}>
-                    <p>¿Ya estas registrado? <a href="/login">INGRESAR</a></p>
-                </div>
+                    <div className={styles.inputGroup}>
+                        <label className={styles.label}>Nombre Completo</label>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            name="name"
+                            placeholder="Ej: Juan Pérez"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.name}
+                        />
+                        {formik.touched.name && formik.errors.name && (
+                            <span className={styles.error}>{formik.errors.name}</span>
+                        )}
+                    </div>
 
-            <div>
-                <label className={styles.label}>NOMBRE:</label>
-                <input className={styles.input} type="text" name="name" placeholder="Ingrese su nombre" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.name} />
-                {formik.errors.name && formik.errors.name ? (
-                <label className={styles.error}>{formik.errors.name}</label>) : null}
-            </div>
-            <div>
-                <label className={styles.label}>DNI:</label>
-                <input className={styles.input} type="number" name="nDni" placeholder="Ingrese su DNI" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.nDni} />
-                {formik.errors.nDni && formik.errors.nDni ? (
-                <label className={styles.error}>{formik.errors.nDni}</label>) : null}    
-            </div>
-            <div>
-                <label className={styles.label}>FECHA DE NACIMIENTO:</label>
-                <input className={styles.input} type="date" name="birthdate" placeholder="Ingrese su fecha de nacimiento" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.birthdate} />
-                {formik.errors.birthdate && formik.errors.birthdate ? (  
-                <label className={styles.error}>{formik.errors.birthdate}</label>) : null}
-            </div>
-            <div>
-                <label className={styles.label}>EMAIL:</label>
-                <input className={styles.input} type="email" name="email" placeholder="Ingrese su email. Ej: mail@mail.com" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.email} />
-                {formik.errors.email && formik.errors.email ? (
-                <label className={styles.error}>{formik.errors.email}</label>) : null}
-            </div>
-            <div>
-                <label className={styles.label}>USUARIO:</label>
-                <input className={styles.input} type="text" name="username" placeholder="Ingrese su username" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.username}  />
-                {formik.errors.username && formik.errors.username ? (
-                <label className={styles.error}>{formik.errors.username}</label>) : null}        
-            </div>
-            
-            <div>
-                <label className={styles.label}>CONTRASEÑA:</label>
-                <input className={styles.input} type="password" name="password" placeholder="Ingrese su password" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.password}  />
-                {formik.errors.password && formik.errors.password ? (
-                <label className={styles.error}>{formik.errors.password}</label>) : null}
-            </div>
+                    <div className={styles.inputGroup}>
+                        <label className={styles.label}>DNI</label>
+                        <input
+                            className={styles.input}
+                            type="number"
+                            name="nDni"
+                            placeholder="Sin puntos"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.nDni}
+                        />
+                        {formik.touched.nDni && formik.errors.nDni && (
+                            <span className={styles.error}>{formik.errors.nDni}</span>
+                        )}
+                    </div>
 
-            <button className={styles.button} type="submit" disabled={!(formik.isValid && formik.dirty)} >REGISTRAR</button>
+                    <div className={styles.inputGroup}>
+                        <label className={styles.label}>Fecha de Nacimiento</label>
+                        <input
+                            className={styles.input}
+                            type="date"
+                            name="birthdate"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.birthdate}
+                        />
+                        {formik.touched.birthdate && formik.errors.birthdate && (
+                            <span className={styles.error}>{formik.errors.birthdate}</span>
+                        )}
+                    </div>
 
-        </form>
-      
+                    <div className={styles.inputGroup}>
+                        <label className={styles.label}>Email</label>
+                        <input
+                            className={styles.input}
+                            type="email"
+                            name="email"
+                            placeholder="tu@email.com"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.email}
+                        />
+                        {formik.touched.email && formik.errors.email && (
+                            <span className={styles.error}>{formik.errors.email}</span>
+                        )}
+                    </div>
+
+                    <div className={styles.inputGroup}>
+                        <label className={styles.label}>Usuario</label>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            name="username"
+                            placeholder="Elige un nombre de usuario"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.username}
+                        />
+                        {formik.touched.username && formik.errors.username && (
+                            <span className={styles.error}>{formik.errors.username}</span>
+                        )}
+                    </div>
+
+                    <div className={styles.inputGroup}>
+                        <label className={styles.label}>Contraseña</label>
+                        <input
+                            className={styles.input}
+                            type="password"
+                            name="password"
+                            placeholder="Mínimo 8 caracteres"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.password}
+                        />
+                        {formik.touched.password && formik.errors.password && (
+                            <span className={styles.error}>{formik.errors.password}</span>
+                        )}
+                    </div>
+
+                    <button className={styles.button} type="submit" disabled={!(formik.isValid && formik.dirty)}>
+                        REGISTRARME
+                    </button>
+
+                    <div className={`${styles.footer} ${styles.fullWidth}`}>
+                        ¿Ya tienes cuenta? <Link to="/login" className={styles.link}>Inicia Sesión</Link>
+                    </div>
+
+                </form>
+            </div>
+        </div>
     );
 }
