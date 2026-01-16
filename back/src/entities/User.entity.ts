@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn, JoinColumn, OneToMany } from "typeorm";
-import { Credential } from "./Credential.Entity";
+import { Credential } from "./Credential.entity";
 import { Appointment } from "./Appointment.entity";
 
 
@@ -27,8 +27,8 @@ export class User {
     createdAt?: Date
     @UpdateDateColumn({ type: "timestamp" })
     updatedAt?: Date
- 
-}   
- 
+
+}
+
 
 
