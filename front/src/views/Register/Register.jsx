@@ -28,7 +28,7 @@ export default function Register() {
         },
         validate: registerFormValidate,
         onSubmit: (values) => {
-            axios.post('http://localhost:3000/users/register', values)
+            axios.post(`${import.meta.env.VITE_API_URL}/users/register`, values)
                 .then(res => {
                     if (res.status === 201) {
                         Swal.fire({

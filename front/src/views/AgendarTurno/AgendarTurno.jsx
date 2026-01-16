@@ -36,7 +36,7 @@ const AgendarTurno = () => {
         userId: user.id
       };
 
-      axios.post(`http://localhost:3000/appointments/schedule`, schedule)
+      axios.post(`${import.meta.env.VITE_API_URL}/appointments/schedule`, schedule)
         .then(res => {
           if (res.status === 201) {
             Swal.fire({

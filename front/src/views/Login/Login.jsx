@@ -18,8 +18,8 @@ export default function Login() {
     validate: loginFormValidate,
     onSubmit: (values) => {
       // Logic unchanged, just verifying if endpoints match. 
-      // Assumption: backend is on localhost:3000
-      axios.post('http://localhost:3000/users/login', values)
+      // Assumption: backend is configured via env var
+      axios.post(`${import.meta.env.VITE_API_URL}/users/login`, values)
         .then(res => {
           if (res.status === 200) {
             localStorage.setItem('user', JSON.stringify(res.data.user))

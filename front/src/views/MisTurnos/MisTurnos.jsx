@@ -9,7 +9,7 @@ export default function MisTurnos({ userId }) {
     const [turnos, setTurnos] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/users/${userId}`)
+        axios.get(`${import.meta.env.VITE_API_URL}/users/${userId}`)
             .then(({ data }) => {
                 setTurnos(data.data.appointments);
             })
