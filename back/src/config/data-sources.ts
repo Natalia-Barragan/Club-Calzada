@@ -3,7 +3,6 @@ import { config } from './envs';
 import { User } from '../entities/User.entity';
 import { Credential } from '../entities/Credential.Entity';
 
-
 export const AppDataSource = new DataSource({
   type: "postgres",
   host: config.BD_HOST,
@@ -14,9 +13,11 @@ export const AppDataSource = new DataSource({
   synchronize: config.BD_SYNC,
   dropSchema: config.BD_DROP_SCHEMA,
   logging: config.DB_LOGGING,
-  ssl: config.BD_SSL ? { rejectUnauthorized: false } : false,
-  entities: ['src/entities/*.entity.ts']
+  ssl: { rejectUnauthorized: false }, // Simplificado para asegurar que Neon conecte
 
+  // --- CORRECCIÓN CRÍTICA AQUÍ ---
+  // __dirname permite que funcione tanto en 'src' (local) como en 'dist' (producción)
+  entities: [__dirname + "/../entities/*.entity{.ts,.js}"],
 });
 
 export const UserModel: Repository<User> = AppDataSource.getRepository(User);
