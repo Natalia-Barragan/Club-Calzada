@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn, JoinColumn, OneToMany } from "typeorm";
-import { Credential } from "./Credential.TEMP";
+import { Credential } from "./Credential.entity";
 import { Appointment } from "./Appointment.entity";
 
 

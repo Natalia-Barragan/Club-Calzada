@@ -2,7 +2,7 @@ import { UserDto, UserRegisterDto, UserLoginDto } from '../dto/UserDto';
 import { getCredentialServices, checkUserCredentials } from './credentialsServices';
 import { AppDataSource, UserModel } from '../config/data-sources';
 import { User } from '../entities/User.entity';
-import { Credential } from '../entities/Credential.TEMP';
+import { Credential } from '../entities/Credential.entity';
 
 
 export const registerUserService = async (userData: UserRegisterDto): Promise<User> => {
