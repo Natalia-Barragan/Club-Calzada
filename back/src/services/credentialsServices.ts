@@ -1,6 +1,6 @@
 import { EntityManager } from 'typeorm';
 import { CredentialModel } from '../config/data-sources';
-import { Credential } from '../entities/Credential.entity';
+import { Credential } from '../entities/Credential.TEMP';
 
 export const crypPass = async (text: string): Promise<string> => {
     const encoder = new TextEncoder();

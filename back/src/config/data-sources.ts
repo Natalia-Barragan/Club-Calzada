@@ -1,7 +1,7 @@
 import { DataSource, Repository } from 'typeorm';
 import { config } from './envs';
 import { User } from '../entities/User.entity';
-import { Credential } from '../entities/Credential.entity';
+import { Credential } from '../entities/Credential.TEMP';
 
 export const AppDataSource = new DataSource({
   type: "postgres",
