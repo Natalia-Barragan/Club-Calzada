@@ -6,30 +6,31 @@ const HOURS = [
     "19:00", "20:00", "21:00", "22:00", "23:00"
 ];
 
-// Helper to get dates for the current week (Monday to Sunday)
-const getWeekDates = () => {
-    const today = new Date();
-    const dayOfWeek = today.getDay(); // 0 (Sun) - 6 (Sat)
+// Helper to get dates for the week starting from startDate
+const getWeekDates = (startDate) => {
+    // If no startDate provided, default to current week's Monday
+    let baseDate = startDate ? new Date(startDate) : new Date();
 
-    // Adjust to make Monday index 0
-    const diffToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
-
-    const monday = new Date(today);
-    monday.setDate(today.getDate() + diffToMonday);
+    if (!startDate) {
+        const dayOfWeek = baseDate.getDay();
+        const diffToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+        baseDate.setDate(baseDate.getDate() + diffToMonday);
+    }
 
     const weekDates = [];
     for (let i = 0; i < 7; i++) {
-        const date = new Date(monday);
-        date.setDate(monday.getDate() + i);
+        const date = new Date(baseDate);
+        date.setDate(baseDate.getDate() + i);
         weekDates.push(date);
     }
     return weekDates;
 };
 
-const weekDates = getWeekDates();
 const DAYS = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 
-export default function ScheduleGrid({ resourceName, appointments }) {
+export default function ScheduleGrid({ resourceName, appointments, startDate }) {
+
+    const weekDates = getWeekDates(startDate);
 
     const handleSlotClick = (appointment) => {
         if (!appointment) return;
@@ -49,7 +50,7 @@ export default function ScheduleGrid({ resourceName, appointments }) {
             icon: 'info',
             confirmButtonColor: '#2ecc71',
             customClass: {
-                popup: styles.swalPopup, // Ensure you have styles or remove if generic is fine
+                popup: styles.swalPopup,
                 title: styles.swalTitle
             }
         });
@@ -57,13 +58,12 @@ export default function ScheduleGrid({ resourceName, appointments }) {
 
     // Helper to find appointment for a specific cell
     const getAppointmentForSlot = (dayDate, hour) => {
-        // dayDate is a Date object. appointment.date is YYYY-MM-DD string
         const dateString = dayDate.toISOString().split('T')[0];
 
         return appointments.find(app =>
             app.date === dateString &&
             app.time === hour &&
-            app.status !== 'cancelled' // Only show active slots as occupied
+            app.status !== 'cancelled'
         );
     };
 
