@@ -16,6 +16,9 @@ export class User {
     @Column({ type: "integer", nullable: false, unique: true })
     nDni: number
 
+    @Column({ type: "varchar", length: 20, default: "user" }) /* New Field */
+    role: string
+
     @OneToOne(() => Credential, { eager: true, cascade: true })
     @JoinColumn()
     credentials: Credential

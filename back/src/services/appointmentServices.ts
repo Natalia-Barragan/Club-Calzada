@@ -8,7 +8,9 @@ import { AppointmentRepository } from "../repositories/Appointment.Repository";
 
 
 export const getAppointmentService = async (): Promise<Appointment[]> => {
-    return await AppointmentRepository.find();
+    return await AppointmentRepository.find({
+        relations: ['user']
+    });
 }
 
 export const getAppointmentByIdService = async (id: number): Promise<Appointment> => {
