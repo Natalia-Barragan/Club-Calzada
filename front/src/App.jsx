@@ -7,6 +7,7 @@ import Navbar from './components/Navbar/Navbar'
 import { useEffect, useState, } from 'react'
 import NotFound from './components/NotFound/NotFound'
 import AgendarTurno from './views/AgendarTurno/AgendarTurno'
+import AdminDashboard from './views/AdminDashboard/AdminDashboard'
 
 
 
@@ -16,24 +17,24 @@ function App() {
   const [user, setUser] = useState(false);
   const [isNotFound, setNotFound] = useState(false);
 
-    useEffect(() => {
+  useEffect(() => {
 
-      const validRoutes = ['/login', '/register', '/', '/agendarTurno', '/misTurnos'];
-      setNotFound(!validRoutes.includes(location.pathname));
-    
-      const userJson = localStorage.getItem('user');
-      const user = JSON.parse(userJson);
-      if (user) setUser(user);
+    const validRoutes = ['/login', '/register', '/', '/agendarTurno', '/misTurnos'];
+    setNotFound(!validRoutes.includes(location.pathname));
 
-      if (!user && location.pathname !== '/login' && location.pathname !== '/register') {
-        navigate('/login');
-      }
-      if (user && (location.pathname === '/login' || location.pathname === '/register')) {
-        navigate('/');
-      }
+    const userJson = localStorage.getItem('user');
+    const user = JSON.parse(userJson);
+    if (user) setUser(user);
+
+    if (!user && location.pathname !== '/login' && location.pathname !== '/register') {
+      navigate('/login');
+    }
+    if (user && (location.pathname === '/login' || location.pathname === '/register')) {
+      navigate('/');
+    }
 
 
-    }, [location.pathname, navigate ]);
+  }, [location.pathname, navigate]);
   return (
     <>
 
@@ -50,20 +51,21 @@ function App() {
         <>
           {!isNotFound && (
             <>
-              <Navbar user={user} setUser={setUser}/>     
-            </>      
+              <Navbar user={user} setUser={setUser} />
+            </>
           )}
           <>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/agendarTurno" element={<AgendarTurno />} />
               <Route path="/misTurnos" element={<MisTurnos userId={user?.id} />} />
+              {user?.role === 'admin' && <Route path="/admin" element={<AdminDashboard />} />}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </>
         </>
       )
-      }      
+      }
     </>
   )
 }

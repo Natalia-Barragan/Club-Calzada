@@ -54,6 +54,11 @@ const Navbar = ({ user, setUser }) => {
             <li>
               <Link to="/misTurnos" className={`${styles.link} ${location.pathname === '/misTurnos' ? styles.active : ''}`}>Mis Turnos</Link>
             </li>
+            {user.role === 'admin' && (
+              <li>
+                <Link to="/admin" className={`${styles.link} ${location.pathname === '/admin' ? styles.active : ''}`}>Admin</Link>
+              </li>
+            )}
           </>
         )}
       </ul>
