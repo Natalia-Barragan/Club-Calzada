@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import styles from './AdminDashboard.module.css';
+import ScheduleGrid from '../../components/ScheduleGrid/ScheduleGrid';
 
 export default function AdminDashboard() {
     const [appointments, setAppointments] = useState([]);
@@ -13,6 +14,7 @@ export default function AdminDashboard() {
                 const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/appointments`);
                 setAppointments(data.data);
             } catch (error) {
+                console.error(error);
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
@@ -25,50 +27,37 @@ export default function AdminDashboard() {
         fetchData();
     }, []);
 
+    const filterByResource = (resource) => {
+        return appointments.filter(app => app.description === resource);
+    };
+
     if (loading) return <div className={styles.loading}>Cargando panel...</div>;
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>Panel de Administración</h1>
+            <h1 className={styles.title}>Panel de Administración - Cronograma Semanal</h1>
 
             <section className={styles.section}>
-                <h2>Reservas</h2>
-                {appointments.length === 0 ? (
-                    <p>No hay reservas registradas.</p>
-                ) : (
-                    <div className={styles.tableResponsive}>
-                        <table className={styles.table}>
-                            <thead>
-                                <tr>
-                                    <th>Fecha</th>
-                                    <th>Hora</th>
-                                    <th>Actividad</th>
-                                    <th>Usuario</th>
-                                    <th>DNI</th>
-                                    <th>Email</th>
-                                    <th>Estado</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {appointments.map((app) => (
-                                    <tr key={app.id}>
-                                        <td>{new Date(app.date).toLocaleDateString()}</td>
-                                        <td>{app.time}</td>
-                                        <td>{app.description}</td>
-                                        <td>{app.user?.name || 'N/A'}</td>
-                                        <td>{app.user?.nDni || 'N/A'}</td>
-                                        <td>{app.user?.email || 'N/A'}</td>
-                                        <td>
-                                            <span className={`${styles.status} ${styles[app.status]}`}>
-                                                {app.status}
-                                            </span>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                )}
+                <ScheduleGrid
+                    resourceName="Cancha Cubierta"
+                    appointments={filterByResource('Cancha Cubierta')}
+                />
+                <ScheduleGrid
+                    resourceName="Cancha Aire Libre 1"
+                    appointments={filterByResource('Cancha Aire Libre 1')}
+                />
+                <ScheduleGrid
+                    resourceName="Cancha Aire Libre 2"
+                    appointments={filterByResource('Cancha Aire Libre 2')}
+                />
+                <ScheduleGrid
+                    resourceName="Pileta"
+                    appointments={filterByResource('Pileta')}
+                />
+                <ScheduleGrid
+                    resourceName="Gimnasio"
+                    appointments={filterByResource('Gimnasio')}
+                />
             </section>
         </div>
     );
