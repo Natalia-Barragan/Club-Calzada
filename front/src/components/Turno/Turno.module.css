@@ -22,18 +22,18 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
+/* Title styles */
 .title {
   font-size: 1.1rem;
-  /* Reduced from 1.5rem */
   margin: 0 0 0.5rem 0;
   text-align: left !important;
   font-weight: 600;
   color: #2c3e50;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  /* Allow wrapping instead of truncation */
+  white-space: normal;
+  line-height: 1.3;
   padding-right: 60px;
-  /* Space for badge */
+  /* Keep space for badge */
 }
 
 .p {
