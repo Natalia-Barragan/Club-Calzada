@@ -14,7 +14,7 @@ const Home = () => {
         <h1 className={styles.heroTitle}>Club Calzada</h1>
         <p className={styles.heroSubtitle}>
           {user ? `¡Hola, ${user.name}! ` : ''}
-          Excelencia deportiva y pasión en cada disciplina. Únete a la comunidad más grande del barrio.
+          Unite a la comunidad más grande del barrio!
         </p>
         <Link to="/agendarTurno" className={styles.ctaButton}>
           Reservar Cancha
@@ -27,18 +27,18 @@ const Home = () => {
           <div className={styles.card}>
             <FaFutbol className={styles.cardIcon} />
             <h3 className={styles.cardTitle}>Fútbol 5</h3>
-            <p className={styles.cardText}>Canchas de césped sintético de última generación.</p>
+            {/* <p className={styles.cardText}>Canchas de césped sintético de última generación.</p> */}
           </div>
           <div className={styles.card}>
             <FaDumbbell className={styles.cardIcon} />
             <h3 className={styles.cardTitle}>Gimnasio</h3>
-            <p className={styles.cardText}>Equipamiento moderno y entrenadores calificados.</p>
+            {/* <p className={styles.cardText}>Equipamiento moderno y entrenadores calificados.</p> */}
           </div>
 
           <div className={styles.card}>
             <FaSwimmingPool className={styles.cardIcon} />
             <h3 className={styles.cardTitle}>Natación</h3>
-            <p className={styles.cardText}>Pileta climatizada para todas las edades.</p>
+            {/* <p className={styles.cardText}>Pileta climatizada para todas las edades.</p> */}
           </div>
         </div>
       </section>
