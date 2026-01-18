@@ -20,23 +20,6 @@
   /* Ensure background doesn't spill out */
 }
 
-.turnoContainer::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('../../assets/logo-fondo.jpg');
-  background-size: 60%;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.1;
-  /* Very faint */
-  z-index: 0;
-  pointer-events: none;
-}
-
 .turnoContainer>* {
   position: relative;
   z-index: 1;
