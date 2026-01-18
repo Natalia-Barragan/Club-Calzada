@@ -18,6 +18,8 @@
   transition: transform 0.2s, box-shadow 0.2s;
   overflow: hidden;
   /* Ensure background doesn't spill out */
+  z-index: 60;
+  /* Sit on top of global watermark overlay */
 }
 
 .turnoContainer>* {
