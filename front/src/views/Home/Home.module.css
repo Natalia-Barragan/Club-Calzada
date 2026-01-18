@@ -5,17 +5,15 @@
 }
 
 .hero {
-    /* Dark overlay still good for contrast with white text */
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../../assets/pelotaGrandeClara.jpg');
-    background-size: cover;
-    background-position: center;
+    /* Removed background image as requested, now transparent to show global watermark */
     height: 80vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: #fff;
+    color: var(--color-text-primary);
+    /* Changed to dark text */
     padding: 2rem;
 }
 
@@ -25,7 +23,7 @@
     margin-bottom: 1rem;
     letter-spacing: 2px;
     text-transform: uppercase;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    /* Removed text-shadow */
 }
 
 @media (max-width: 768px) {
@@ -47,7 +45,8 @@
     font-weight: 500;
     margin-bottom: 2rem;
     max-width: 600px;
-    color: #f0f0f0;
+    color: var(--color-text-secondary);
+    /* Changed to dark text */
 }
 
 .ctaButton {
