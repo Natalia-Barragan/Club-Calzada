@@ -52,10 +52,12 @@ body::before {
     /* Adjust size as needed, maybe contain or a specific % */
     background-position: center;
     background-repeat: no-repeat;
-    opacity: 0.05;
-    /* Very subtle */
-    z-index: -1;
+    opacity: 0.15;
+    /* More visible as requested */
+    z-index: 50;
+    /* Overlay mode to sit on top of other backgrounds */
     pointer-events: none;
+    /* Click-through */
 }
 
 a {

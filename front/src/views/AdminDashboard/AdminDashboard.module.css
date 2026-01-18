@@ -5,7 +5,7 @@
     background-color: #1a1a1a;
     /* Dark background to match theme and cover watermark */
     position: relative;
-    z-index: 10;
+    z-index: 100;
     /* Ensure it sits above the body pseudo-element */
 }
 
