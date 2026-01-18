@@ -34,6 +34,8 @@ body {
     background-color: var(--color-bg-body);
     color: var(--color-text-primary);
     line-height: 1.6;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 a {

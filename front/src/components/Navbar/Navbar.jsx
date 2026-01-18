@@ -1,12 +1,16 @@
+import { useState } from 'react';
 import styles from './Navbar.module.css';
 import logo from '../../assets/logo.jpg';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const Navbar = ({ user, setUser }) => {
-
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const closeMenu = () => setMenuOpen(false);
 
   const handlerLogOut = () => {
     const storedUser = localStorage.getItem('user');
@@ -42,28 +46,48 @@ const Navbar = ({ user, setUser }) => {
         <span className={styles.title}>Club Calzada</span>
       </div>
 
-      <ul className={styles.navLinks}>
+      <button className={styles.hamburger} onClick={toggleMenu} aria-label="Menu">
+        <span className={styles.bar}></span>
+        <span className={styles.bar}></span>
+        <span className={styles.bar}></span>
+      </button>
+
+      <ul className={`${styles.navLinks} ${menuOpen ? styles.open : ''}`}>
         {user && (
           <>
             <li>
-              <Link to="/" className={`${styles.link} ${location.pathname === '/' ? styles.active : ''}`}>Inicio</Link>
+              <Link to="/" onClick={closeMenu} className={`${styles.link} ${location.pathname === '/' ? styles.active : ''}`}>Inicio</Link>
             </li>
             <li>
-              <Link to="/agendarTurno" className={`${styles.link} ${location.pathname === '/agendarTurno' ? styles.active : ''}`}>Reservar</Link>
+              <Link to="/agendarTurno" onClick={closeMenu} className={`${styles.link} ${location.pathname === '/agendarTurno' ? styles.active : ''}`}>Reservar</Link>
             </li>
             <li>
-              <Link to="/misTurnos" className={`${styles.link} ${location.pathname === '/misTurnos' ? styles.active : ''}`}>Mis Turnos</Link>
+              <Link to="/misTurnos" onClick={closeMenu} className={`${styles.link} ${location.pathname === '/misTurnos' ? styles.active : ''}`}>Mis Turnos</Link>
             </li>
             {user.role === 'admin' && (
               <li>
-                <Link to="/admin" className={`${styles.link} ${location.pathname === '/admin' ? styles.active : ''}`}>Admin</Link>
+                <Link to="/admin" onClick={closeMenu} className={`${styles.link} ${location.pathname === '/admin' ? styles.active : ''}`}>Admin</Link>
               </li>
             )}
+
+            {/* Mobile Actions (moved here for mobile view) */}
+            <li className={styles.mobileActions}>
+              <span className={styles.userWelcome}>{user.name}</span>
+              <button onClick={handlerLogOut} className={styles.logoutBtn}>Salir</button>
+            </li>
           </>
+        )}
+
+        {!user && (
+          <li className={styles.mobileActions}>
+            <Link to="/register" onClick={closeMenu} className={styles.registerLink}>Registrarse</Link>
+            <Link to="/login" onClick={closeMenu} className={styles.loginBtn}>Ingresar</Link>
+          </li>
         )}
       </ul>
 
-      <div className={styles.actions}>
+
+      <div className={styles.desktopActions}>
         {user ? (
           <>
             <span className={styles.userWelcome}>{user.name}</span>
