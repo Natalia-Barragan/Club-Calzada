@@ -8,8 +8,8 @@
   /* Slightly smaller radius */
   background-color: white;
   /* Clean background */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* Subtle shadow */
+  box-shadow: 0 4px 6px rgba(15, 137, 64, 0.2);
+  /* Green shadow */
   color: #333;
   font-family: 'Segoe UI', sans-serif;
   width: 250px;
@@ -20,16 +20,16 @@
 
 .turnoContainer:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 12px rgba(15, 137, 64, 0.3);
 }
 
 /* Title styles */
 .title {
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   margin: 0 0 0.5rem 0;
   text-align: left !important;
   font-weight: 600;
-  color: #2c3e50;
+  color: var(--color-green);
   /* Allow wrapping instead of truncation */
   white-space: normal;
   line-height: 1.3;
