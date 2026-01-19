@@ -52,7 +52,7 @@
 .heroSubtitle2 {
     font-size: 1.5rem;
     font-weight: 500;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     max-width: 600px;
     color: var(--color-text-secondary);
     /* Changed to dark text */
