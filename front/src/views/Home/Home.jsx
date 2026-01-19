@@ -14,7 +14,7 @@ const Home = () => {
         <h1 className={styles.heroTitle}>Club Calzada</h1>
         <p className={styles.heroSubtitle}>
           {user ? `¡Hola, ${user.name}! ` : ''}
-          Unite a la comunidad más grande del barrio!
+          Bienvenido al club más grande del barrio!
         </p>
         <Link to="/agendarTurno" className={styles.ctaButton}>
           Reservar Cancha
