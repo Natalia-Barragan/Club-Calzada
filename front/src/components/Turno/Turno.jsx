@@ -48,9 +48,11 @@ function Turno({ id, date, time, description, status, setTurnos }) {
   return (
     <div className={Style.turnoContainer}>
       <h3 className={Style.title}>{description || 'Turno'}</h3>
-      <p className={Style.p}>Fecha: {date}</p>
+      <p className={Style.p}>Fecha: {date ? date.split('-').reverse().join('/') : date}</p>
       <p className={Style.p}>Hora: {time}</p>
-      <p className={status === "active" ? Style.active : Style.cancelled}>{status}</p>
+      <p className={status === "active" ? Style.active : Style.cancelled}>
+        {status === 'active' ? 'Activo' : status === 'cancelled' ? 'Cancelado' : status}
+      </p>
       <div className={Style.buttonContainer}>
         <button className={Style.button}
           onClick={handlerCancel}

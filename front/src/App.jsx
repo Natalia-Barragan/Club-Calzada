@@ -8,7 +8,7 @@ import { useEffect, useState, } from 'react'
 import NotFound from './components/NotFound/NotFound'
 import AgendarTurno from './views/AgendarTurno/AgendarTurno'
 import AdminDashboard from './views/AdminDashboard/AdminDashboard'
-
+import UserProfile from './views/UserProfile/UserProfile'
 
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
 
-    const validRoutes = ['/login', '/register', '/', '/agendarTurno', '/misTurnos'];
+    const validRoutes = ['/login', '/register', '/', '/agendarTurno', '/misTurnos', '/perfil'];
     setNotFound(!validRoutes.includes(location.pathname));
 
     const userJson = localStorage.getItem('user');
@@ -59,6 +59,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/agendarTurno" element={<AgendarTurno />} />
               <Route path="/misTurnos" element={<MisTurnos userId={user?.id} />} />
+              <Route path="/perfil" element={<UserProfile />} />
               {user?.role === 'admin' && <Route path="/admin" element={<AdminDashboard />} />}
               <Route path="*" element={<NotFound />} />
             </Routes>

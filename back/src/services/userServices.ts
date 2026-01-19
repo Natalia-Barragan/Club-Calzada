@@ -56,3 +56,13 @@ export const loginUserService = async (userCredencials: UserLoginDto): Promise<U
     return userFound;
 };
 
+export const updateProfileService = async (id: number, userData: UserRegisterDto): Promise<User> => {
+    const userFound: User | null = await UserModel.findOne({ where: { id: id } });
+    if (!userFound) throw new Error(`el usuario con Id ${id} no existe`);
+    userFound.name = userData.name;
+    userFound.email = userData.email;
+    userFound.birthdate = new Date(userData.birthdate);
+    userFound.nDni = userData.nDni;
+    await UserModel.save(userFound);
+    return userFound;
+}

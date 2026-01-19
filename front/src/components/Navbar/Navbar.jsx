@@ -72,8 +72,8 @@ const Navbar = ({ user, setUser }) => {
 
             {/* Mobile Actions (moved here for mobile view) */}
             <li className={styles.mobileActions}>
-              <span className={styles.userWelcome}>{user.name}</span>
-              <button onClick={handlerLogOut} className={styles.logoutBtn}>Salir</button>
+              <Link to="/perfil" onClick={closeMenu} className={styles.link}>Mi Perfil</Link>
+              <button onClick={handlerLogOut} className={styles.logoutBtn}>Cerrar Sesión</button>
             </li>
           </>
         )}
@@ -89,10 +89,18 @@ const Navbar = ({ user, setUser }) => {
 
       <div className={styles.desktopActions}>
         {user ? (
-          <>
-            <span className={styles.userWelcome}>{user.name}</span>
-            <button onClick={handlerLogOut} className={styles.logoutBtn}>Salir</button>
-          </>
+          <div className={styles.dropdownContainer}>
+            <button className={styles.dropdownToggle} onClick={() => setMenuOpen(!menuOpen)}>
+              {user.name}
+              <span className={`${styles.arrow} ${menuOpen ? styles.open : ''}`}>▼</span>
+            </button>
+            {menuOpen && (
+              <div className={styles.dropdownMenu}>
+                <Link to="/perfil" className={styles.dropdownItem} onClick={() => setMenuOpen(false)}>Mi Perfil</Link>
+                <button onClick={handlerLogOut} className={styles.dropdownItem}>Cerrar Sesión</button>
+              </div>
+            )}
+          </div>
         ) : (
           <>
             <Link to="/register" className={styles.registerLink}>Registrarse</Link>

@@ -53,8 +53,8 @@ export default function AdminDashboard() {
 
     const RESOURCES = [
         'Cancha Cubierta',
-        'Cancha Aire Libre 1',
-        'Cancha Aire Libre 2',
+        'Cancha Roja (exterior)',
+        'Cancha Verde (exterior)',
         'Pileta',
         'Gimnasio'
     ];

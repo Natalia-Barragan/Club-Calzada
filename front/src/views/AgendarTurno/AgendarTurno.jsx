@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { dateTimeValidate } from '../../helpers/formValidate';
 import axios from 'axios';
@@ -6,6 +7,8 @@ import styles from '../AgendarTurno/AgendarTurno.module.css';
 import pelotaImg from '../../assets/pelota2.gif';
 
 const AgendarTurno = () => {
+
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -53,6 +56,8 @@ const AgendarTurno = () => {
               customClass: {
                 title: styles.swalTitle,
               }
+            }).then(() => {
+              navigate('/');
             });
             formik.resetForm();
           }
@@ -106,8 +111,8 @@ const AgendarTurno = () => {
                 className={styles.select}
               >
                 <option value="Cancha Cubierta">Cancha Cubierta</option>
-                <option value="Cancha Aire Libre 1">Cancha Aire Libre 1</option>
-                <option value="Cancha Aire Libre 2">Cancha Aire Libre 2</option>
+                <option value="Cancha Roja (exterior)">Cancha Roja (exterior)</option>
+                <option value="Cancha Verde (exterior)">Cancha Verde (exterior)</option>
               </select>
             </div>
           )}

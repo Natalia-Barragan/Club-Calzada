@@ -72,7 +72,7 @@ export default function Login() {
               className={styles.input}
               type="text"
               name="username"
-              placeholder="Tu nombre de usuario"
+              placeholder="Tonga999"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.username}
