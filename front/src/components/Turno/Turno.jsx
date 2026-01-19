@@ -10,7 +10,7 @@ function Turno({ id, date, time, description, status, setTurnos }) {
       showCancelButton: true,
       confirmButtonColor: "#0f8940",
       cancelButtonColor: "#d32828cf",
-      confirmButtonText: 'Cancelar',
+      confirmButtonText: 'Si, cancelar',
       cancelButtonText: 'No, mantener',
       customClass: {
         title: Style.swalTitle,

@@ -1,4 +1,4 @@
-import { getUsersService, getUserByIdService, registerUserService, loginUserService } from '../services/userServices';
+import { getUsersService, getUserByIdService, registerUserService, loginUserService, updateProfileService } from '../services/userServices';
 
 import { UserDto } from '../dto/UserDto';
 import { Request, Response } from 'express';
