@@ -53,7 +53,7 @@ const UserProfile = () => {
                         text: 'Tus datos se han guardado correctamente.',
                         background: '#1E1E1E',
                         color: 'white',
-                        confirmButtonColor: '#eebb13'
+                        confirmButtonColor: '#0f8940'
                     });
                 })
                 .catch(err => {

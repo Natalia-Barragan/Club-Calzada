@@ -8,7 +8,7 @@
 
 .mainTitle {
     text-align: center;
-    color: #eebb13;
+    color: var(--color-green);
     font-size: 2.5rem;
     font-weight: 800;
     text-transform: uppercase;
@@ -47,7 +47,7 @@
     margin-bottom: 2rem;
     font-weight: bold;
     text-transform: uppercase;
-    border-bottom: 2px solid #eebb13;
+    border-bottom: 2px solid var(--color-green);
     padding-bottom: 10px;
     display: inline-block;
     align-self: center;
@@ -122,15 +122,15 @@
 
 .input:focus {
     outline: none;
-    border-color: #eebb13;
+    border-color: var(--color-green);
 }
 
 .button {
     margin-top: auto;
     /* Push to bottom if needed, or just margin top 1rem */
     padding: 14px;
-    background-color: #eebb13;
-    color: #000;
+    background-color: var(--color-green);
+    color: #fff;
     border: none;
     border-radius: 6px;
     font-size: 1rem;
@@ -141,7 +141,7 @@
 }
 
 .button:hover:not(:disabled) {
-    background-color: #ffc102;
+    background-color: var(--color-green-dark);
     transform: translateY(-2px);
 }
 
