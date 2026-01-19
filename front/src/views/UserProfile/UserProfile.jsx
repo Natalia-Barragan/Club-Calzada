@@ -71,88 +71,92 @@ const UserProfile = () => {
     if (!user) return <div className={styles.container}><p style={{ color: 'white' }}>Cargando perfil...</p></div>;
 
     return (
-        <div className={styles.container}>
-            {/* Left Column: Current Data */}
-            <div className={styles.card}>
-                <h2 className={styles.title}>Datos Actuales</h2>
-                <div className={styles.dataContainer}>
-                    <div className={styles.dataItem}>
-                        <span className={styles.dataLabel}>Nombre Completo</span>
-                        <span className={styles.dataValue}>{user.name}</span>
-                    </div>
-                    <div className={styles.dataItem}>
-                        <span className={styles.dataLabel}>Email</span>
-                        <span className={styles.dataValue}>{user.email}</span>
-                    </div>
-                    <div className={styles.dataItem}>
-                        <span className={styles.dataLabel}>DNI</span>
-                        <span className={styles.dataValue}>{user.nDni}</span>
-                    </div>
-                    <div className={styles.dataItem}>
-                        <span className={styles.dataLabel}>Fecha de Nacimiento</span>
-                        <span className={styles.dataValue}>
-                            {user.birthdate ? new Date(user.birthdate).toLocaleDateString() : 'No registrada'}
-                        </span>
+        <div className={styles.pageContainer}>
+            <h1 className={styles.mainTitle}>MI PERFIL</h1>
+
+            <div className={styles.cardsContainer}>
+                {/* Left Column: Current Data */}
+                <div className={styles.card}>
+                    <h2 className={styles.title}>Datos Actuales</h2>
+                    <div className={styles.dataContainer}>
+                        <div className={styles.dataItem}>
+                            <span className={styles.dataLabel}>Nombre Completo</span>
+                            <span className={styles.dataValue}>{user.name}</span>
+                        </div>
+                        <div className={styles.dataItem}>
+                            <span className={styles.dataLabel}>Email</span>
+                            <span className={styles.dataValue}>{user.email}</span>
+                        </div>
+                        <div className={styles.dataItem}>
+                            <span className={styles.dataLabel}>DNI</span>
+                            <span className={styles.dataValue}>{user.nDni}</span>
+                        </div>
+                        <div className={styles.dataItem}>
+                            <span className={styles.dataLabel}>Fecha de Nacimiento</span>
+                            <span className={styles.dataValue}>
+                                {user.birthdate ? new Date(user.birthdate).toLocaleDateString() : 'No registrada'}
+                            </span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            {/* Right Column: Update Form */}
-            <div className={styles.card}>
-                <h2 className={styles.title}>Editar Datos</h2>
-                <form className={styles.form} onSubmit={formik.handleSubmit}>
-                    <div className={styles.field}>
-                        <label className={styles.label}>Nombre Completo</label>
-                        <input
-                            type="text"
-                            name="name"
-                            className={styles.input}
-                            onChange={formik.handleChange}
-                            value={formik.values.name}
-                        />
-                        {formik.errors.name && <p className={styles.error}>{formik.errors.name}</p>}
-                    </div>
+                {/* Right Column: Update Form */}
+                <div className={styles.card}>
+                    <h2 className={styles.title}>Editar Datos</h2>
+                    <form className={styles.form} onSubmit={formik.handleSubmit}>
+                        <div className={styles.field}>
+                            <label className={styles.label}>Nombre Completo</label>
+                            <input
+                                type="text"
+                                name="name"
+                                className={styles.input}
+                                onChange={formik.handleChange}
+                                value={formik.values.name}
+                            />
+                            {formik.errors.name && <p className={styles.error}>{formik.errors.name}</p>}
+                        </div>
 
-                    <div className={styles.field}>
-                        <label className={styles.label}>Email</label>
-                        <input
-                            type="email"
-                            name="email"
-                            className={styles.input}
-                            onChange={formik.handleChange}
-                            value={formik.values.email}
-                        />
-                        {formik.errors.email && <p className={styles.error}>{formik.errors.email}</p>}
-                    </div>
+                        <div className={styles.field}>
+                            <label className={styles.label}>Email</label>
+                            <input
+                                type="email"
+                                name="email"
+                                className={styles.input}
+                                onChange={formik.handleChange}
+                                value={formik.values.email}
+                            />
+                            {formik.errors.email && <p className={styles.error}>{formik.errors.email}</p>}
+                        </div>
 
-                    <div className={styles.field}>
-                        <label className={styles.label}>DNI</label>
-                        <input
-                            type="number"
-                            name="nDni"
-                            className={styles.input}
-                            onChange={formik.handleChange}
-                            value={formik.values.nDni}
-                        />
-                        {formik.errors.nDni && <p className={styles.error}>{formik.errors.nDni}</p>}
-                    </div>
+                        <div className={styles.field}>
+                            <label className={styles.label}>DNI</label>
+                            <input
+                                type="number"
+                                name="nDni"
+                                className={styles.input}
+                                onChange={formik.handleChange}
+                                value={formik.values.nDni}
+                            />
+                            {formik.errors.nDni && <p className={styles.error}>{formik.errors.nDni}</p>}
+                        </div>
 
-                    <div className={styles.field}>
-                        <label className={styles.label}>Fecha de Nacimiento</label>
-                        <input
-                            type="date"
-                            name="birthdate"
-                            className={styles.input}
-                            onChange={formik.handleChange}
-                            value={formik.values.birthdate}
-                        />
-                        {formik.errors.birthdate && <p className={styles.error}>{formik.errors.birthdate}</p>}
-                    </div>
+                        <div className={styles.field}>
+                            <label className={styles.label}>Fecha de Nacimiento</label>
+                            <input
+                                type="date"
+                                name="birthdate"
+                                className={styles.input}
+                                onChange={formik.handleChange}
+                                value={formik.values.birthdate}
+                            />
+                            {formik.errors.birthdate && <p className={styles.error}>{formik.errors.birthdate}</p>}
+                        </div>
 
-                    <button type="submit" className={styles.button}>
-                        Guardar Cambios
-                    </button>
-                </form>
+                        <button type="submit" className={styles.button}>
+                            Guardar Cambios
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     );

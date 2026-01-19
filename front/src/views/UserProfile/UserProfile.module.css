@@ -1,13 +1,28 @@
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+.pageContainer {
     min-height: 80vh;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.mainTitle {
+    text-align: center;
+    color: #eebb13;
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+.cardsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    /* Cards will have same height */
     gap: 2rem;
     flex-wrap: wrap;
-    margin-top: 30px;
-    /* Para móviles */
 }
 
 .card {
@@ -20,21 +35,31 @@
     color: white;
     flex: 1;
     min-width: 300px;
+    display: flex;
+    flex-direction: column;
 }
 
 .title {
     text-align: center;
-    color: #eebb13;
-    font-size: 1.8rem;
+    color: #fff;
+    /* Cambio a blanco para subtítulos, mainTitle es amarillo */
+    font-size: 1.5rem;
     margin-bottom: 2rem;
     font-weight: bold;
     text-transform: uppercase;
+    border-bottom: 2px solid #eebb13;
+    padding-bottom: 10px;
+    display: inline-block;
+    align-self: center;
+    width: 100%;
 }
 
 .dataContainer {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    flex-grow: 1;
+    /* Occupy remaining space */
 }
 
 .dataItem {
@@ -54,12 +79,17 @@
     font-size: 1.2rem;
     font-weight: 500;
     color: #fff;
+    word-break: break-word;
+    /* Permite que el texto largo como emails baje de línea */
+    overflow-wrap: break-word;
+    /* Estándar moderno */
 }
 
 .form {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    flex-grow: 1;
 }
 
 .field {
@@ -84,6 +114,10 @@
     color: white;
     font-size: 1rem;
     transition: border-color 0.3s ease;
+    width: 100%;
+    /* Asegura que ocupe el ancho disponible */
+    box-sizing: border-box;
+    /* Incluye padding y border en el ancho total */
 }
 
 .input:focus {
@@ -92,7 +126,8 @@
 }
 
 .button {
-    margin-top: 1rem;
+    margin-top: auto;
+    /* Push to bottom if needed, or just margin top 1rem */
     padding: 14px;
     background-color: #eebb13;
     color: #000;
@@ -114,4 +149,15 @@
     color: #ff6b6b;
     font-size: 0.85rem;
     margin-top: 0.25rem;
+}
+
+@media (max-width: 768px) {
+    .cardsContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 100%;
+    }
 }
