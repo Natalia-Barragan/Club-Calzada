@@ -45,7 +45,7 @@ const AgendarTurno = () => {
             Swal.fire({
               title: `¡RESERVA CONFIRMADA!\n${finalDescription}`,
               color: "white",
-              background: "#1E1E1E",
+              background: "rgba(30, 30, 30, 0.85)",
               showConfirmButton: false,
               timer: 3000,
               backdrop: `rgba(0, 0, 0, 0.4)
@@ -136,15 +136,26 @@ const AgendarTurno = () => {
 
           <div className={styles.field}>
             <label className={styles.label} htmlFor="time">HORA</label>
-            <input
+            <select
               id="time"
-              type="time"
               name="time"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.time}
-              className={styles.input}
-            />
+              className={styles.select}
+            >
+              <option value="" label="Selecciona una hora" />
+              <option value="14:00" label="14:00 hs" />
+              <option value="15:00" label="15:00 hs" />
+              <option value="16:00" label="16:00 hs" />
+              <option value="17:00" label="17:00 hs" />
+              <option value="18:00" label="18:00 hs" />
+              <option value="19:00" label="19:00 hs" />
+              <option value="20:00" label="20:00 hs" />
+              <option value="21:00" label="21:00 hs" />
+              <option value="22:00" label="22:00 hs" />
+              <option value="23:00" label="23:00 hs" />
+            </select>
             {formik.errors.time && (
               <p className={styles.error}>{formik.errors.time}</p>
             )}
