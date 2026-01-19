@@ -14,12 +14,15 @@ const Home = () => {
         <h1 className={styles.heroTitle}>Club Calzada</h1>
         <p className={styles.heroSubtitle}>
           {user ? `¡Hola, ${user.name}! ` : ''}
-          <br />
+        </p>
+        <p>
           Bienvenido al club más grande del barrio.
         </p>
-        <Link to="/agendarTurno" className={styles.ctaButton}>
-          Reservar Cancha
-        </Link>
+        <p>
+          <Link to="/agendarTurno" className={styles.ctaButton}>
+            Reservar Cancha
+          </Link>
+        </p>
       </section>
 
       <section className={styles.features}>
