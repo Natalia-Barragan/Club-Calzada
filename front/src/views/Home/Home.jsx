@@ -15,7 +15,7 @@ const Home = () => {
         <p className={styles.heroSubtitle}>
           {user ? `¡Hola, ${user.name}! ` : ''}
         </p>
-        <p>
+        <p className={styles.heroSubtitle}>
           Bienvenido al club más grande del barrio.
         </p>
         <p>
