@@ -1,9 +1,12 @@
 .container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     min-height: 80vh;
-    padding: 20px;
+    padding: 2rem;
+    gap: 2rem;
+    flex-wrap: wrap;
+    /* Para móviles */
 }
 
 .card {
@@ -14,14 +17,42 @@
     max-width: 500px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     color: white;
+    flex: 1;
+    min-width: 300px;
 }
 
 .title {
     text-align: center;
     color: #eebb13;
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin-bottom: 2rem;
     font-weight: bold;
+    text-transform: uppercase;
+}
+
+.dataContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.dataItem {
+    border-bottom: 1px solid #333;
+    padding-bottom: 1rem;
+}
+
+.dataLabel {
+    display: block;
+    color: #888;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.dataValue {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #fff;
 }
 
 .form {
@@ -76,11 +107,6 @@
 .button:hover:not(:disabled) {
     background-color: #ffc102;
     transform: translateY(-2px);
-}
-
-.button:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
 }
 
 .error {

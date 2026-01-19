@@ -72,8 +72,34 @@ const UserProfile = () => {
 
     return (
         <div className={styles.container}>
+            {/* Left Column: Current Data */}
             <div className={styles.card}>
-                <h1 className={styles.title}>MI PERFIL</h1>
+                <h2 className={styles.title}>Datos Actuales</h2>
+                <div className={styles.dataContainer}>
+                    <div className={styles.dataItem}>
+                        <span className={styles.dataLabel}>Nombre Completo</span>
+                        <span className={styles.dataValue}>{user.name}</span>
+                    </div>
+                    <div className={styles.dataItem}>
+                        <span className={styles.dataLabel}>Email</span>
+                        <span className={styles.dataValue}>{user.email}</span>
+                    </div>
+                    <div className={styles.dataItem}>
+                        <span className={styles.dataLabel}>DNI</span>
+                        <span className={styles.dataValue}>{user.nDni}</span>
+                    </div>
+                    <div className={styles.dataItem}>
+                        <span className={styles.dataLabel}>Fecha de Nacimiento</span>
+                        <span className={styles.dataValue}>
+                            {user.birthdate ? new Date(user.birthdate).toLocaleDateString() : 'No registrada'}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            {/* Right Column: Update Form */}
+            <div className={styles.card}>
+                <h2 className={styles.title}>Editar Datos</h2>
                 <form className={styles.form} onSubmit={formik.handleSubmit}>
                     <div className={styles.field}>
                         <label className={styles.label}>Nombre Completo</label>
