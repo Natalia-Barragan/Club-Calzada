@@ -80,8 +80,8 @@ const Navbar = ({ user, setUser }) => {
 
         {!user && (
           <li className={styles.mobileActions}>
-            <Link to="/register" onClick={closeMenu} className={styles.registerLink}>Registrarse</Link>
-            <Link to="/login" onClick={closeMenu} className={styles.loginBtn}>Ingresar</Link>
+            <Link to="/login" onClick={closeMenu} className={styles.loginLink}>Iniciar Sesión</Link>
+            <Link to="/register" onClick={closeMenu} className={styles.registerBtn}>Registrarte</Link>
           </li>
         )}
       </ul>
@@ -103,8 +103,8 @@ const Navbar = ({ user, setUser }) => {
           </div>
         ) : (
           <>
-            <Link to="/register" className={styles.registerLink}>Registrarse</Link>
-            <Link to="/login" className={styles.loginBtn}>Ingresar</Link>
+            <Link to="/login" className={styles.loginLink}>Iniciar Sesión</Link>
+            <Link to="/register" className={styles.registerBtn}>Registrarte</Link>
           </>
         )}
       </div>

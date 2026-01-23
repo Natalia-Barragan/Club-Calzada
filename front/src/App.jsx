@@ -1,5 +1,6 @@
 import Home from './views/Home/Home'
 import Login from './views/Login/Login'
+import Landing from './views/Landing/Landing'
 import MisTurnos from './views/MisTurnos/MisTurnos'
 import Register from './views/Register/Register'
 import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom'
@@ -26,7 +27,7 @@ function App() {
     const user = JSON.parse(userJson);
     if (user) setUser(user);
 
-    if (!user && location.pathname !== '/login' && location.pathname !== '/register') {
+    if (!user && location.pathname !== '/login' && location.pathname !== '/register' && location.pathname !== '/') {
       navigate('/login');
     }
     if (user && (location.pathname === '/login' || location.pathname === '/register')) {
@@ -42,6 +43,7 @@ function App() {
         <>
           <Navbar user={user} setUser={setUser} />
           <Routes>
+            <Route path="/" element={<Landing />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="*" element={<Navigate to="/login" />} />

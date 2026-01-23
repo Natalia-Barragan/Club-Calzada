@@ -104,6 +104,59 @@
   gap: 1.5rem;
 }
 
+/* Auth Buttons */
+/* Previous .registerLink became .loginLink (White) */
+.loginLink {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.loginLink:hover {
+  color: var(--color-green);
+}
+
+/* Previous .loginBtn became .registerBtn (Green) */
+.registerBtn {
+  background-color: var(--color-green);
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.registerBtn:hover {
+  background-color: var(--color-green-dark);
+  transform: translateY(-2px);
+}
+
+.logoutBtn {
+  background: none;
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+}
+
+.logoutBtn:hover {
+  background-color: #ff4d4d;
+  color: white;
+}
+
 /* Dropdown Styles */
 .dropdownContainer {
   position: relative;
