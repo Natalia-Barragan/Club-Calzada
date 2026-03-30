@@ -35,7 +35,10 @@ export const registerAppointment = async (req: Request <unknown, unknown, Appoin
             data: newAppointment
         });
     } catch (error) {
-        res.status(400).json({ message: 'Ocurrio un error', error: error instanceof Error ? error.message : 'Error desconocido' });
+        res.status(400).json({ 
+            message: error instanceof Error ? error.message : 'No se pudo realizar la reserva',
+            error: error instanceof Error ? error.message : 'Error desconocido' 
+        });
     }
 };
 

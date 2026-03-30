@@ -2,6 +2,8 @@ import { DataSource, Repository } from 'typeorm';
 import { config } from './envs';
 import { User } from '../entities/User.entity';
 import { Credential } from '../entities/Credential.entity';
+import { Payment } from '../entities/Payment.entity';
+import { Appointment } from '../entities/Appointment.entity';
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -13,12 +15,13 @@ export const AppDataSource = new DataSource({
   synchronize: config.BD_SYNC,
   dropSchema: config.BD_DROP_SCHEMA,
   logging: config.DB_LOGGING,
-  ssl: { rejectUnauthorized: false }, // Simplificado para asegurar que Neon conecte
+  ssl: { rejectUnauthorized: false }, 
 
-  // --- CORRECCIÓN CRÍTICA AQUÍ ---
-  // __dirname permite que funcione tanto en 'src' (local) como en 'dist' (producción)
-  entities: [__dirname + "/../entities/*.entity{.ts,.js}"],
+  entities: [User, Credential, Payment, Appointment],
 });
 
-export const UserModel: Repository<User> = AppDataSource.getRepository(User);
-export const CredentialModel: Repository<Credential> = AppDataSource.getRepository(Credential);
+export const getUserModel = () => AppDataSource.getRepository(User);
+export const getCredentialModel = () => AppDataSource.getRepository(Credential);
+export const getPaymentModel = () => AppDataSource.getRepository(Payment);
+export const getAppointmentModel = () => AppDataSource.getRepository(Appointment);
+

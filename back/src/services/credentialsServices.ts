@@ -1,5 +1,5 @@
 import { EntityManager } from 'typeorm';
-import { CredentialModel } from '../config/data-sources';
+import { getCredentialModel } from '../config/data-sources';
 import { Credential } from '../entities/Credential.entity';
 
 export const crypPass = async (text: string): Promise<string> => {
@@ -12,7 +12,7 @@ export const crypPass = async (text: string): Promise<string> => {
 };
 
 export const checkUserExists = async (username: string): Promise<void> => {
-    const usernameFound = await CredentialModel.findOne({ where: { username } });
+    const usernameFound = await getCredentialModel().findOne({ where: { username } });
     if (usernameFound) {
         throw new Error('El usuario ya existe, por favor elige otro');
     }
@@ -37,7 +37,7 @@ export const checkUserCredentials = async (
     password: string
 ): Promise<Credential> => {
 
-    const credentialFound = await CredentialModel.findOne({ where: { username } });
+    const credentialFound = await getCredentialModel().findOne({ where: { username } });
 
     const cryptPassword = await crypPass(password);
 

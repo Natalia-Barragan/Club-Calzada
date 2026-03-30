@@ -1,13 +1,14 @@
-import {Router} from 'express';
+import { Router } from 'express';
 import { getAppointments, registerAppointment, cancelAppointment, getAppointmentsById } from '../controllers/appointmentController';
+import { checkAuth, checkAdmin } from '../middlewares/authMiddleware';
 
 
 export const appointmentRouter : Router = Router();
 
-appointmentRouter.get('/', getAppointments);
+// Protegida: Solo Admin ve lista completa
+appointmentRouter.get('/', checkAuth, checkAdmin, getAppointments);
 
-appointmentRouter.get('/:id', getAppointmentsById);
-
-appointmentRouter.post('/schedule', registerAppointment);
-
-appointmentRouter.put('/cancel/:id', cancelAppointment);
+// Protegidas: Solo con sesión activa
+appointmentRouter.get('/:id', checkAuth, getAppointmentsById);
+appointmentRouter.post('/schedule', checkAuth, registerAppointment);
+appointmentRouter.put('/cancel/:id', checkAuth, cancelAppointment);

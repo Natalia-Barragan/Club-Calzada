@@ -12,7 +12,7 @@ export const getUsers = async (req: Request, res: Response): Promise<void> => {
     try {
         const users: UserDto[] = await getUsersService();
         res.status(200).json({
-            message: 'Lista de usuarios',
+            message: 'Lista de usuarios [BACKEND ACTUALIZADO]',
             data: users
         });
     } catch (error) {
@@ -57,13 +57,30 @@ export const registerUser = async (req: Request<unknown, unknown, UserRegisterDt
     };
 }
 
+import jwt from 'jsonwebtoken';
+import { config } from '../config/envs';
+
 export const loginUser = async (req: Request<unknown, unknown, UserLoginDto>, res: Response): Promise<void> => {
     try {
         const user: User | null = await loginUserService(req.body);
+        
+        if (!user) {
+            res.status(401).json({ message: 'Credenciales inválidas' });
+            return;
+        }
+
+        // GENERAR TOKEN JWT
+        const token = jwt.sign(
+            { id: user.id, role: user.role, email: user.email },
+            config.JWT_SECRET,
+            { expiresIn: '2h' }
+        );
+
         res.status(200).json({
-            message: 'Usuario logueado',
+            message: 'Usuario logueado con éxito',
             login: true,
-            user: user
+            user: user,
+            token: token
         });
     } catch (error) {
         res.status(400).json({

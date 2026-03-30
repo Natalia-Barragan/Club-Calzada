@@ -1,7 +1,10 @@
 import {  AppDataSource } from "../config/data-sources";
 import { Appointment } from "../entities/Appointment.entity";
 
-export const AppointmentRepository =  AppDataSource.getRepository(Appointment).extend({
+let repository: any;
+export const getAppointmentRepository = () => {
+    if (!repository) {
+        repository = AppDataSource.getRepository(Appointment).extend({
 
     validateAllowAppointment:  function(date: Date, time: string):void {
 
@@ -46,3 +49,6 @@ export const AppointmentRepository =  AppDataSource.getRepository(Appointment).e
         })
     }
 });
+    }
+    return repository;
+};

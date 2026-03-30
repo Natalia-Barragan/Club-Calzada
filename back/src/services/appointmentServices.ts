@@ -2,19 +2,19 @@ import { Status } from "../interfaces/IAppointment";
 import { AppointmentRegisterDto } from "../dto/AppointmentDto";
 import { getUserByIdService } from "./userServices";
 import { Appointment } from "../entities/Appointment.entity";
-import { AppointmentRepository } from "../repositories/Appointment.Repository";
+import { getAppointmentRepository } from "../repositories/Appointment.Repository";
 
 
 
 
 export const getAppointmentService = async (): Promise<Appointment[]> => {
-    return await AppointmentRepository.find({
+    return await getAppointmentRepository().find({
         relations: ['user']
     });
 }
 
 export const getAppointmentByIdService = async (id: number): Promise<Appointment> => {
-    const apponintmentFound = await AppointmentRepository.findOne({ where: { id } });
+    const apponintmentFound = await getAppointmentRepository().findOne({ where: { id } });
 
     if (!apponintmentFound) throw new Error(`La reserva con id ${id} no fue encontrado`);
     return apponintmentFound;
@@ -22,13 +22,18 @@ export const getAppointmentByIdService = async (id: number): Promise<Appointment
 
 export const registerAppointmentService = async (appointmentData: AppointmentRegisterDto): Promise<Appointment> => {
 
-    await getUserByIdService(appointmentData.userId);
+    const user = await getUserByIdService(appointmentData.userId);
+    
+    // REGLA DE ORO: Si el socio no está al día (deudor), no puede reservar.
+    if (user && !user.active) {
+        throw new Error('No puedes reservar porque tienes pagos pendientes. Por favor, regulariza tu situación en administración.');
+    }
 
-    AppointmentRepository.validateAllowAppointment(appointmentData.date, appointmentData.time);
+    getAppointmentRepository().validateAllowAppointment(appointmentData.date, appointmentData.time);
 
-    await AppointmentRepository.validateExistingApointment(appointmentData.userId, appointmentData.date, appointmentData.time);
+    await getAppointmentRepository().validateExistingApointment(appointmentData.userId, appointmentData.date, appointmentData.time);
 
-    const newAppointment = AppointmentRepository.create({
+    const newAppointment = getAppointmentRepository().create({
         date: appointmentData.date,
         time: appointmentData.time,
         description: appointmentData.description,
@@ -37,14 +42,14 @@ export const registerAppointmentService = async (appointmentData: AppointmentReg
         },
     })
 
-    return await AppointmentRepository.save(newAppointment);
+    return await getAppointmentRepository().save(newAppointment);
 };
 
 export const cancelAppointmentService = async (id: number): Promise<void> => {
 
-    const appointmentFound = await AppointmentRepository.findOne({ where: { id } })
+    const appointmentFound = await getAppointmentRepository().findOne({ where: { id } })
 
     if (!appointmentFound) throw new Error(`La reserva con id ${id} no fue encontrado`);
     appointmentFound.status = Status.cancelled;
-    await AppointmentRepository.save(appointmentFound);
+    await getAppointmentRepository().save(appointmentFound);
 }   

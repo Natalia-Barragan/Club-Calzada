@@ -9,4 +9,5 @@ export interface Iconfig {
     BD_DROP_SCHEMA: boolean;
     DB_LOGGING: boolean;
     BD_SSL: boolean;
+    JWT_SECRET: string;
 }

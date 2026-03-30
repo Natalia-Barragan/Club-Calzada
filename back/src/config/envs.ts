@@ -10,7 +10,8 @@ export const config: Iconfig = {
     BD_PASSWORD: process.env.BD_PASSWORD,
     BD_NAME: process.env.BD_NAME,
     BD_SYNC: process.env.BD_SYNC ? process.env.BD_SYNC === 'true' : true,
-    BD_DROP_SCHEMA: process.env.BD_DROP_SCHEMA ? process.env.BD_DROP_SCHEMA === 'true' : true,
+    BD_DROP_SCHEMA: process.env.BD_DROP_SCHEMA ? process.env.BD_DROP_SCHEMA === 'true' : false,
     DB_LOGGING: process.env.DB_LOGGING ? process.env.DB_LOGGING === 'true' : true,
     BD_SSL: process.env.BD_SSL === 'true',
+    JWT_SECRET: process.env.JWT_SECRET || 'riverplate_secret_key'
 }
