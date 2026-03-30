@@ -17,18 +17,32 @@
     padding: 2rem;
 }
 
-.heroTitle {
-    font-size: 3.5rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-    letter-spacing: 2px;
+.heroPreTitle {
+    font-size: 2rem;
+    font-weight: 600;
     text-transform: uppercase;
-    /* Removed text-shadow */
+    letter-spacing: 3px;
+    color: var(--color-green);
+    margin-bottom: 0.2rem;
+}
+
+.heroTitle {
+    font-size: 4.5rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    line-height: 1;
+    color: var(--color-text-primary);
+    letter-spacing: -1px;
 }
 
 @media (max-width: 768px) {
+    .heroPreTitle {
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+    }
+
     .heroTitle {
-        font-size: 2rem;
+        font-size: 2.8rem;
     }
 
     .heroSubtitle {

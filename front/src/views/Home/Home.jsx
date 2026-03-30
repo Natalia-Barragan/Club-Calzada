@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <div className={styles.homeContainer}>
       <section className={styles.hero}>
-        <h2>Club Atlético y Social</h2>
+        <h2 className={styles.heroPreTitle}>Club Atlético y Social</h2>
         <h1 className={styles.heroTitle}>Villa Calzada</h1>
 
         <p className={styles.heroSubtitle}>
