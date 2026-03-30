@@ -9,7 +9,10 @@ export default function MisTurnos({ userId }) {
     const [turnos, setTurnos] = useState([]);
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/users/${userId}`)
+        const token = localStorage.getItem('token');
+        axios.get(`${import.meta.env.VITE_API_URL}/users/${userId}`, {
+            headers: { Authorization: `Bearer ${token}` }
+        })
             .then(({ data }) => {
                 const fetchedTurnos = data.data.appointments;
 

@@ -1,0 +1,251 @@
+.carnetContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  perspective: 1000px;
+  gap: 20px;
+}
+
+.downloadButton {
+  background: var(--color-green);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-family: var(--font-main);
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.downloadButton:hover {
+  background: var(--color-green-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(15, 137, 64, 0.3);
+}
+
+
+.card {
+  width: 500px;
+  height: 300px;
+  background: linear-gradient(135deg, #2c313a 0%, #171a20 100%);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease;
+}
+
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.watermark {
+  position: absolute;
+  top: 50%;
+  left: 62%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.3; /* Adjusted for better integration */
+  pointer-events: none;
+  z-index: 1;
+}
+
+
+.watermark img {
+  max-width: 85%;
+  max-height: 85%;
+  object-fit: contain;
+  filter: brightness(1.2) contrast(1.1); /* Ensure visibility on dark background */
+}
+
+.cardBody {
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align left to balance with the header */
+  line-height: 1.1;
+}
+
+.logoSubtext {
+  font-size: 0.55rem; /* Slightly smaller for the institutional name */
+  color: #cfcfcf;
+  letter-spacing: 2px; /* Less spacing for longer text */
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.inactive {
+  background: rgba(137, 15, 15, 0.4); /* Subtly red for inactive status */
+  border-color: rgba(137, 15, 15, 0.3);
+}
+
+.logoText {
+  font-family: var(--font-main);
+  font-weight: 900;
+  font-size: 1.4rem; /* Adjusted for 'VILLA CALZADA' */
+  letter-spacing: 2.5px;
+  color: #ffffff;
+  margin-top: -2px;
+}
+
+
+.memberStatus {
+  background: rgba(15, 137, 64, 0.7);
+  padding: 5px 14px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 1.2px;
+  box-shadow: 0 0 10px rgba(15, 137, 64, 0.2);
+  border: 1px solid rgba(15, 137, 64, 0.5);
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  padding: 15px 0;
+  gap: 20px;
+}
+
+.photoSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.photoContainer {
+  width: 120px;
+  height: 150px;
+  background: #333;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.memberNumber {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.infoSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 12px;
+  padding-top: 5px;
+}
+
+.infoGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 0.6rem;
+  color: #808080;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.value {
+  font-size: 1rem;
+  color: #ffffff;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.since {
+  font-size: 0.6rem;
+  color: #606060;
+  font-weight: bold;
+}
+
+
+
+.cardGlow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(138, 138, 138, 0.1) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+  animation: glowMove 8s infinite linear;
+}
+
+@keyframes glowMove {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 450px) {
+  .card {
+    width: 320px;
+    height: 200px;
+  }
+
+  .photoContainer {
+    width: 70px;
+    height: 85px;
+  }
+
+  .value {
+    font-size: 0.8rem;
+  }
+
+  .logoText {
+    font-size: 1.1rem;
+  }
+}

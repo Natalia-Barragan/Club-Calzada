@@ -145,3 +145,78 @@
         padding: 1rem;
     }
 }
+
+/* User Management Tab Styles */
+.userList {
+    width: 100%;
+    margin-top: 1rem;
+    overflow-x: auto;
+}
+
+.userTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    color: #eee;
+}
+
+.userTable th, .userTable td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+.userTable th {
+    background-color: #333;
+    color: #2ecc71;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+.statusActive {
+    color: #2ecc71;
+    font-weight: 800;
+    font-size: 0.9rem;
+    background: rgba(46, 204, 113, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.statusInactive {
+    color: #e74c3c;
+    font-weight: 800;
+    font-size: 0.9rem;
+    background: rgba(231, 76, 60, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.actionGroup {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.activateBtn, .deactivateBtn, .historyBtn, .addPaymentBtn {
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.75rem;
+    transition: all 0.2s;
+    color: white;
+}
+
+.activateBtn { background-color: #2ebd6a; }
+.deactivateBtn { background-color: #c0392b; }
+.historyBtn { background-color: #3498db; }
+.addPaymentBtn { background-color: #f39c12; }
+
+.activateBtn:hover { background-color: #27ae60; transform: translateY(-1px); }
+.deactivateBtn:hover { background-color: #e74c3c; transform: translateY(-1px); }
+.historyBtn:hover { background-color: #2980b9; transform: translateY(-1px); }
+.addPaymentBtn:hover { background-color: #e67e22; transform: translateY(-1px); }

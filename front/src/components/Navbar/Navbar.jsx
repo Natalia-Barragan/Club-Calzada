@@ -33,6 +33,7 @@ const Navbar = ({ user, setUser }) => {
       }
     }).then(() => {
       localStorage.removeItem('user');
+      localStorage.removeItem('token'); // <--- CLAVE: Destruir la llave
       setUser(null);
       navigate("/login");
     });

@@ -7,10 +7,21 @@ export const registerFormValidate = (imput) => {
     }else if (!/^[a-zA-Z-ÁÉÍÓÚáéíóúÑñ\s]+$/.test(imput.name)) {
         errors.name = 'El nombre debe ser válido';
     }
+
+    if (!imput.lastName?.trim()){
+        errors.lastName = 'El apellido es requerido';
+    }else if (!/^[a-zA-Z-ÁÉÍÓÚáéíóúÑñ\s]+$/.test(imput.lastName)) {
+        errors.lastName = 'El apellido debe ser válido';
+    }
+
     const dniRegex = /^\d{7,8}$/;
 
     if (!dniRegex.test(imput.nDni) && !isNaN(imput.nDni) && imput.nDni !== '') {
         errors.nDni = 'El DNI debe contener solo números y tener entre 7 y 8 dígitos.';
+    }
+
+    if (imput.memberNumber && isNaN(imput.memberNumber)) {
+        errors.memberNumber = 'El número de socio debe ser numérico';
     }
    
     if (!imput.birthdate) {

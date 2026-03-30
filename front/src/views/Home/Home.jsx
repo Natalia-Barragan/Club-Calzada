@@ -11,7 +11,9 @@ const Home = () => {
   return (
     <div className={styles.homeContainer}>
       <section className={styles.hero}>
-        <h1 className={styles.heroTitle}>Club Calzada</h1>
+        <h2>Club Atlético y Social</h2>
+        <h1 className={styles.heroTitle}>Villa Calzada</h1>
+
         <p className={styles.heroSubtitle}>
           {user ? `¡Hola, ${user.name}! ` : ''}
         </p>

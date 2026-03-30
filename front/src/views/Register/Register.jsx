@@ -8,10 +8,10 @@ import Swal from 'sweetalert2';
 
 export default function Register() {
     const navigate = useNavigate();
-
     const formik = useFormik({
         initialValues: {
             name: '',
+            lastName: '',
             nDni: '',
             birthdate: '',
             email: '',
@@ -20,6 +20,7 @@ export default function Register() {
         },
         initialErrors: {
             name: '',
+            lastName: '',
             nDni: '',
             birthdate: '',
             email: '',
@@ -86,18 +87,34 @@ export default function Register() {
                 <form className={styles.form} onSubmit={formik.handleSubmit}>
 
                     <div className={styles.inputGroup}>
-                        <label className={styles.label}>Nombre Completo</label>
+                        <label className={styles.label}>Nombre</label>
                         <input
                             className={styles.input}
                             type="text"
                             name="name"
-                            placeholder="Ej: Juan Pérez"
+                            placeholder="Ej: Juan"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.name}
                         />
                         {formik.touched.name && formik.errors.name && (
                             <span className={styles.error}>{formik.errors.name}</span>
+                        )}
+                    </div>
+
+                    <div className={styles.inputGroup}>
+                        <label className={styles.label}>Apellido</label>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            name="lastName"
+                            placeholder="Ej: Pérez"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.lastName}
+                        />
+                        {formik.touched.lastName && formik.errors.lastName && (
+                            <span className={styles.error}>{formik.errors.lastName}</span>
                         )}
                     </div>
 

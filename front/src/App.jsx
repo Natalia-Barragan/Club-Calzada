@@ -20,7 +20,7 @@ function App() {
 
   useEffect(() => {
 
-    const validRoutes = ['/login', '/register', '/', '/agendarTurno', '/misTurnos', '/perfil'];
+    const validRoutes = ['/login', '/register', '/', '/agendarTurno', '/misTurnos', '/perfil', '/admin'];
     setNotFound(!validRoutes.includes(location.pathname));
 
     const userJson = localStorage.getItem('user');

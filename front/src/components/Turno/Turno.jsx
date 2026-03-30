@@ -19,7 +19,10 @@ function Turno({ id, date, time, description, status, setTurnos }) {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.put(`${import.meta.env.VITE_API_URL}/appointments/cancel/${id}`);
+          const token = localStorage.getItem('token');
+          await axios.put(`${import.meta.env.VITE_API_URL}/appointments/cancel/${id}`, {}, {
+            headers: { Authorization: `Bearer ${token}` }
+          });
 
           setTurnos(prev =>
             prev.map(t => t.id === id ? { ...t, status: 'cancelled' } : t)

@@ -3,6 +3,8 @@ import { useFormik } from 'formik';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import styles from './UserProfile.module.css';
+import CarnetVirtual from '../../components/CarnetVirtual/CarnetVirtual';
+
 
 const UserProfile = () => {
     const [user, setUser] = useState(null);
@@ -12,7 +14,10 @@ const UserProfile = () => {
         if (storedUser) {
             const parsedUser = JSON.parse(storedUser);
             // Fetch fresh data from backend
-            axios.get(`${import.meta.env.VITE_API_URL}/users/${parsedUser.id}`)
+            const token = localStorage.getItem('token');
+            axios.get(`${import.meta.env.VITE_API_URL}/users/${parsedUser.id}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            })
                 .then(res => {
                     setUser(res.data.data);
                 })
@@ -24,13 +29,17 @@ const UserProfile = () => {
         enableReinitialize: true,
         initialValues: {
             name: user?.name || '',
+            lastName: user?.lastName || '',
             email: user?.email || '',
             nDni: user?.nDni || '',
+            memberNumber: user?.memberNumber || '',
+            photoUrl: user?.photoUrl || '',
             birthdate: user?.birthdate ? new Date(user.birthdate).toISOString().split('T')[0] : ''
         },
         validate: (values) => {
             const errors = {};
             if (!values.name) errors.name = 'Requerido';
+            if (!values.lastName) errors.lastName = 'Requerido';
             if (!values.email) errors.email = 'Requerido';
             else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) errors.email = 'Email inválido';
             if (!values.nDni) errors.nDni = 'Requerido';
@@ -39,11 +48,15 @@ const UserProfile = () => {
         },
         onSubmit: (values) => {
             if (!user) return;
+            const token = localStorage.getItem('token');
 
-            axios.put(`${import.meta.env.VITE_API_URL}/users/${user.id}`, values)
+            axios.put(`${import.meta.env.VITE_API_URL}/users/${user.id}`, values, {
+                headers: { Authorization: `Bearer ${token}` }
+            })
                 .then(res => {
                     // Update local storage if needed, or just state
                     const updatedUser = { ...user, ...res.data.data };
+                    // If backend returns the user, we use it
                     setUser(updatedUser);
                     localStorage.setItem('user', JSON.stringify(updatedUser));
 
@@ -68,11 +81,25 @@ const UserProfile = () => {
         }
     });
 
+    const handleFileChange = (e) => {
+        const file = e.currentTarget.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                formik.setFieldValue('photoUrl', reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     if (!user) return <div className={styles.container}><p style={{ color: 'white' }}>Cargando perfil...</p></div>;
 
     return (
         <div className={styles.pageContainer}>
-            <h1 className={styles.mainTitle}>MI PERFIL</h1>
+            <section className={styles.carnetSection}>
+                <h2 className={styles.sectionTitle}>Mi Carnet Virtual</h2>
+                <CarnetVirtual user={user} />
+            </section>
 
             <div className={styles.cardsContainer}>
                 {/* Left Column: Current Data */}
@@ -80,8 +107,16 @@ const UserProfile = () => {
                     <h2 className={styles.title}>Datos Actuales</h2>
                     <div className={styles.dataContainer}>
                         <div className={styles.dataItem}>
-                            <span className={styles.dataLabel}>Nombre Completo</span>
+                            <span className={styles.dataLabel}>Nombre</span>
                             <span className={styles.dataValue}>{user.name}</span>
+                        </div>
+                        <div className={styles.dataItem}>
+                            <span className={styles.dataLabel}>Apellido</span>
+                            <span className={styles.dataValue}>{user.lastName}</span>
+                        </div>
+                        <div className={styles.dataItem}>
+                            <span className={styles.dataLabel}>Nº Socio</span>
+                            <span className={styles.dataValue}>{user.memberNumber}</span>
                         </div>
                         <div className={styles.dataItem}>
                             <span className={styles.dataLabel}>Email</span>
@@ -105,7 +140,7 @@ const UserProfile = () => {
                     <h2 className={styles.title}>Editar Datos</h2>
                     <form className={styles.form} onSubmit={formik.handleSubmit}>
                         <div className={styles.field}>
-                            <label className={styles.label}>Nombre Completo</label>
+                            <label className={styles.label}>Nombre</label>
                             <input
                                 type="text"
                                 name="name"
@@ -114,6 +149,18 @@ const UserProfile = () => {
                                 value={formik.values.name}
                             />
                             {formik.errors.name && <p className={styles.error}>{formik.errors.name}</p>}
+                        </div>
+
+                        <div className={styles.field}>
+                            <label className={styles.label}>Apellido</label>
+                            <input
+                                type="text"
+                                name="lastName"
+                                className={styles.input}
+                                onChange={formik.handleChange}
+                                value={formik.values.lastName}
+                            />
+                            {formik.errors.lastName && <p className={styles.error}>{formik.errors.lastName}</p>}
                         </div>
 
                         <div className={styles.field}>
@@ -150,6 +197,34 @@ const UserProfile = () => {
                                 value={formik.values.birthdate}
                             />
                             {formik.errors.birthdate && <p className={styles.error}>{formik.errors.birthdate}</p>}
+                        </div>
+
+                        <div className={styles.field}>
+                            <label className={styles.label}>Nº de Socio</label>
+                            <input
+                                type="text"
+                                name="memberNumber"
+                                className={styles.input}
+                                onChange={formik.handleChange}
+                                value={formik.values.memberNumber}
+                            />
+                        </div>
+
+                        <div className={styles.field}>
+                            <label className={styles.label}>Foto de Perfil</label>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                className={styles.input}
+                                onChange={handleFileChange}
+                            />
+                            {formik.values.photoUrl && (
+                                <img
+                                    src={formik.values.photoUrl}
+                                    alt="Preview"
+                                    className={styles.previewImage}
+                                />
+                            )}
                         </div>
 
                         <button type="submit" className={styles.button}>

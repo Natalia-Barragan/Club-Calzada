@@ -39,7 +39,10 @@ const AgendarTurno = () => {
         userId: user.id
       };
 
-      axios.post(`${import.meta.env.VITE_API_URL}/appointments/schedule`, schedule)
+      const token = localStorage.getItem('token');
+      axios.post(`${import.meta.env.VITE_API_URL}/appointments/schedule`, schedule, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
         .then(res => {
           if (res.status === 201) {
             Swal.fire({
